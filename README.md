@@ -1,1 +1,1 @@
-# KMA.APZRPMJ2018.WalletSimulator
+# KMA.APZRPMJ2018.TextEditor
