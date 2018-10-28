@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using KMA.APZRPMJ2018.WalletSimulator.Managers;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
-using KMA.APZRPMJ2018.WalletSimulator.Properties;
-using KMA.APZRPMJ2018.WalletSimulator.Tools;
+using KMA.APZRPMJ2018.TextEditor.Properties;
+using KMA.APZRPMJ2018.TextEditor.Tools;
+using KMA.APZRPMJ2018.TextEditor.Managers;
+using KMA.APZRPMJ2018.TextEditor.Models;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels.Authentication
+namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
 {
     internal class SignUpViewModel : INotifyPropertyChanged
     {

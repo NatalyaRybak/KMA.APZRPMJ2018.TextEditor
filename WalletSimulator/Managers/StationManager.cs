@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
+using KMA.APZRPMJ2018.TextEditor.Models;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Managers
+namespace KMA.APZRPMJ2018.TextEditor.Managers
 {
     public static class StationManager
     {

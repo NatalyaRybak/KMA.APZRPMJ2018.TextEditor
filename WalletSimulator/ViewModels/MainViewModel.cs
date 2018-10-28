@@ -1,11 +1,11 @@
 ﻿using System;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
-using KMA.APZRPMJ2018.WalletSimulator.Views;
+using KMA.APZRPMJ2018.TextEditor.Models;
 using System.Windows;
 using System.Windows.Input;
-using KMA.APZRPMJ2018.WalletSimulator.Managers;
+using KMA.APZRPMJ2018.TextEditor.Views;
+using KMA.APZRPMJ2018.TextEditor.Managers;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
+namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
     /// <summary>
     /// Main view model for the Notepad application main window.

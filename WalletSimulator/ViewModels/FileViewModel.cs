@@ -1,13 +1,13 @@
 ﻿using System.Drawing.Text;
 using Microsoft.Win32;
 using System.Windows.Input;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
+using KMA.APZRPMJ2018.TextEditor.Models;
 using System.IO;
 using System.Runtime.CompilerServices;
-using KMA.APZRPMJ2018.WalletSimulator.Tools;
-using KMA.APZRPMJ2018.WalletSimulator.Managers;
+using KMA.APZRPMJ2018.TextEditor.Tools;
+using KMA.APZRPMJ2018.TextEditor.Managers;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
+namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
     /// <summary>
     /// View model for the file toolbar.

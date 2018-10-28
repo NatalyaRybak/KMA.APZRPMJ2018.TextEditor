@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Models
+namespace KMA.APZRPMJ2018.TextEditor.Models
 {
     /// <summary>
     /// Model for document format properties.

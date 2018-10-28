@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Models
+namespace KMA.APZRPMJ2018.TextEditor.Models
 {
     /// <summary>
     /// Model for the text editor document.

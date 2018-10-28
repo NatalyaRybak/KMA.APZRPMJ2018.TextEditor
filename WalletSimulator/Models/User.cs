@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using KMA.APZRPMJ2018.WalletSimulator.Tools;
+using KMA.APZRPMJ2018.TextEditor.Tools;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Models
+namespace KMA.APZRPMJ2018.TextEditor.Models
 {
     public class User
     {
@@ -21,7 +21,6 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
         private string _login;
         private string _password;
         private DateTime _lastLoginDate;
-        private List<Wallet> _wallets;
         private readonly List<Query> _queries;
         #endregion
 
@@ -105,23 +104,12 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
             }
         }
 
-        public List<Wallet> Wallets
-        {
-            get
-            {
-                return _wallets;
-            }
-            private set
-            {
-                _wallets = value;
-            }
-        }
-
+        
         #endregion
 
         #region Constructor
 
-        public User(string firstName, string lastName, string email, string login, string password) : this()
+        public User(string firstName, string lastName, string email, string login, string password)
         {
             _guid = Guid.NewGuid();
             _firstName = firstName;
@@ -151,11 +139,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
                 : _queries.Where(q => q.Filepath == filepath).ToList();
         }
 
-        private User()
-        {
-            _wallets = new List<Wallet>();
-        }
-
+        
         #endregion
 
         private void SetPassword(string password)
@@ -164,7 +148,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
         }
         public bool CheckPassword(string password)
         {
-            return true;
+
             try
             {
                 string res = Encrypting.DecryptString(_password, PrivateKey);

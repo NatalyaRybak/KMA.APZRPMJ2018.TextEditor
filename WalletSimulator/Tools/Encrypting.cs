@@ -3,7 +3,7 @@ using System.Collections;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Tools
+namespace KMA.APZRPMJ2018.TextEditor.Tools
 {
     public static class Encrypting
     {

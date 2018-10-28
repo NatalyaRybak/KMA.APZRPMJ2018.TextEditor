@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace KMA.APZRPMJ2018.WalletSimulator
+namespace KMA.APZRPMJ2018.TextEditor
 {
     /// <summary>
     /// Basic implementation of implementing a windows input command.

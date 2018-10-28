@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
+namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
     /// <summary>
     /// View model for a help dialog.

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
+namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
     class HistoryWindowViewModel
     {

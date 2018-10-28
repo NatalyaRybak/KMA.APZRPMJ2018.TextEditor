@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KMA.APZRPMJ2018.WalletSimulator
+namespace KMA.APZRPMJ2018.TextEditor
 {
     /// <summary>
     /// Interaction logic for HelpDialog.xaml

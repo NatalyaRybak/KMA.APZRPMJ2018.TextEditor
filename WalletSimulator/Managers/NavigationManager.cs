@@ -1,6 +1,6 @@
-﻿using KMA.APZRPMJ2018.WalletSimulator.Tools;
+﻿using KMA.APZRPMJ2018.TextEditor.Tools;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Managers
+namespace KMA.APZRPMJ2018.TextEditor.Managers
 {
     /// <summary>
     /// Singleton manager used to help with navigation betwean controls

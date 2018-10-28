@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using KMA.APZRPMJ2018.WalletSimulator.ViewModels;
+using KMA.APZRPMJ2018.TextEditor.ViewModels;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Views
+namespace KMA.APZRPMJ2018.TextEditor.Views
 {
     /// <summary>
     /// Interaction logic for HistoryWindow.xaml

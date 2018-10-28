@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Properties {
+namespace KMA.APZRPMJ2018.TextEditor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

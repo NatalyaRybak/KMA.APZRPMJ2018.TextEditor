@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Models
+namespace KMA.APZRPMJ2018.TextEditor.Models
 {
     public enum QueryType
     {

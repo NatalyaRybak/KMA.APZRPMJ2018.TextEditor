@@ -1,17 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using KMA.APZRPMJ2018.WalletSimulator.Models;
+using KMA.APZRPMJ2018.TextEditor.Models;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Managers
+namespace KMA.APZRPMJ2018.TextEditor.Managers
 {
     public class DBManager
     {
         private static readonly List<User> Users = new List<User>();
-
-        static DBManager()
-        {
-            AddUser(new User("Nata", "Rybak", "email@gmail.com", "n", "r"));
-        }
 
         public static bool UserExists(string login)
         {

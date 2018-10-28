@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows;
-using KMA.APZRPMJ2018.WalletSimulator.Views;
-using KMA.APZRPMJ2018.WalletSimulator.Views.Authentication;
-using SignUpView = KMA.APZRPMJ2018.WalletSimulator.Views.Authentication.SignUpView;
+using KMA.APZRPMJ2018.TextEditor.Views.Authentication;
+using KMA.APZRPMJ2018.TextEditor.Views;
+using SignUpView = KMA.APZRPMJ2018.TextEditor.Views.Authentication.SignUpView;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Tools
+namespace KMA.APZRPMJ2018.TextEditor.Tools
 {
     internal enum ModesEnum
     {
@@ -17,7 +17,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Tools
     {
         private readonly IContentWindow _contentWindow;
         private SignInView _signInView;
-        private SignUpView _signUpView;
+        private Views.Authentication.SignUpView _signUpView;
         private MainView _mainView;
 
         internal NavigationModel(IContentWindow contentWindow)
@@ -33,7 +33,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Tools
                     _contentWindow.ContentControl.Content = _signInView ?? (_signInView = new SignInView());
                     break;
                 case ModesEnum.SingUp:
-                    _contentWindow.ContentControl.Content = _signUpView ?? (_signUpView = new SignUpView());
+                    _contentWindow.ContentControl.Content = _signUpView ?? (_signUpView = new Views.Authentication.SignUpView());
                     break;
                 case ModesEnum.Main:
                     _contentWindow.ContentControl.Content = _mainView ?? (_mainView = new MainView());

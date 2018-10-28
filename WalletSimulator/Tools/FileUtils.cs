@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace KMA.APZRPMJ2018.WalletSimulator.Tools
+namespace KMA.APZRPMJ2018.TextEditor.Tools
 {
     public class FileUtils
     {

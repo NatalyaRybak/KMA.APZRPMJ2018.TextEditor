@@ -1,7 +1,7 @@
-﻿using KMA.APZRPMJ2018.WalletSimulator.Models;
-using KMA.APZRPMJ2018.WalletSimulator.ViewModels;
+﻿using KMA.APZRPMJ2018.TextEditor.ViewModels;
+using KMA.APZRPMJ2018.TextEditor.Models;
 
-namespace KMA.APZRPMJ2018.WalletSimulator
+namespace KMA.APZRPMJ2018.TextEditor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
