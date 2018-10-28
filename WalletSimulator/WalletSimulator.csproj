@@ -93,15 +93,24 @@
     </Compile>
     <Compile Include="Managers\NavigationManager.cs" />
     <Compile Include="Managers\DBManager.cs" />
+    <Compile Include="Models\DocumentModel.cs" />
+    <Compile Include="Models\FormatModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Wallet.cs" />
+    <Compile Include="ObservableObject.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Tools\Controls\LabelAndTextControl.xaml.cs">
+      <DependentUpon>LabelAndTextControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Encrypting.cs" />
     <Compile Include="Tools\IContentWindow.cs" />
     <Compile Include="Tools\NavigationModel.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="ViewModels\Authentication\SignUpViewModel.cs" />
-    <Compile Include="ViewModels\Editor\EditorViewModel.cs" />
-    <Compile Include="ViewModels\WalletConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\EditorViewModel.cs" />
+    <Compile Include="ViewModels\FileViewModel.cs" />
+    <Compile Include="ViewModels\HelpViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\Authentication\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
@@ -112,14 +121,20 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Managers\StationManager.cs" />
     <Compile Include="ViewModels\Authentication\SignInViewModel.cs" />
-    <Compile Include="Tools\Controls\LabelAndTextControl.xaml.cs">
-      <DependentUpon>LabelAndTextControl.xaml</DependentUpon>
+    <Compile Include="Views\FontDialog.xaml.cs">
+      <DependentUpon>FontDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\MainViewViewModel.cs" />
-    <Compile Include="Views\Wallet\WalletConfigurationView.xaml.cs">
-      <DependentUpon>WalletConfigurationView.xaml</DependentUpon>
+    <Compile Include="Views\HelpDialog.xaml.cs">
+      <DependentUpon>HelpDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\Controls\LabelAndTextControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,10 +150,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -146,15 +157,15 @@
     <Compile Include="Views\Authentication\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Tools\Controls\LabelAndTextControl.xaml">
+    <Page Include="Views\FontDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Wallet\WalletConfigurationView.xaml">
+    <Page Include="Views\HelpDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

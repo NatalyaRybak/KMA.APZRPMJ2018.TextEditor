@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFNotepad
+namespace KMA.APZRPMJ2018.WalletSimulator
 {
     /// <summary>
     /// Base class for objects that require property notification.
