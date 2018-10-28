@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace KMA.APZRPMJ2018.WalletSimulator
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FontDialog.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class FontDialog : Window
     {
-        public MainView()
+        public FontDialog()
         {
             InitializeComponent();
-            
         }
     }
 }

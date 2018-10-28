@@ -100,6 +100,7 @@
     <Compile Include="Tools\NavigationModel.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="ViewModels\Authentication\SignUpViewModel.cs" />
+    <Compile Include="ViewModels\Editor\EditorViewModel.cs" />
     <Compile Include="ViewModels\WalletConfigurationViewModel.cs" />
     <Compile Include="Views\Authentication\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using KMA.APZRPMJ2018.WalletSimulator.Views;
 using KMA.APZRPMJ2018.WalletSimulator.Views.Authentication;
 using SignUpView = KMA.APZRPMJ2018.WalletSimulator.Views.Authentication.SignUpView;
