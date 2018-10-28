@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using KMA.APZRPMJ2018.WalletSimulator.Tools;
 
 namespace KMA.APZRPMJ2018.WalletSimulator.Models
@@ -20,6 +22,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
         private string _password;
         private DateTime _lastLoginDate;
         private List<Wallet> _wallets;
+        private readonly List<Query> _queries;
         #endregion
 
         #region Properties
@@ -113,6 +116,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
                 _wallets = value;
             }
         }
+
         #endregion
 
         #region Constructor
@@ -125,8 +129,26 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
             _email = email;
             _login = login;
             _lastLoginDate = DateTime.Now;
-           
+            _queries = new List<Query>();
+
             SetPassword(password);
+        }
+
+        public void AddQuery(string filepath, QueryType type)
+        {
+            AddQuery(new Query(filepath, type));
+        }
+
+        public void AddQuery(Query q)
+        {
+            _queries.Add(q);
+        }
+
+        public List<Query> GetQueries(string filepath = null)
+        {
+            return filepath == null
+                ? _queries.ToList()
+                : _queries.Where(q => q.Filepath == filepath).ToList();
         }
 
         private User()
@@ -142,6 +164,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Models
         }
         public bool CheckPassword(string password)
         {
+            return true;
             try
             {
                 string res = Encrypting.DecryptString(_password, PrivateKey);

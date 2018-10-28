@@ -95,6 +95,7 @@
     <Compile Include="Managers\DBManager.cs" />
     <Compile Include="Models\DocumentModel.cs" />
     <Compile Include="Models\FormatModel.cs" />
+    <Compile Include="Models\Query.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="ObservableObject.cs" />
@@ -103,6 +104,7 @@
       <DependentUpon>LabelAndTextControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\Encrypting.cs" />
+    <Compile Include="Tools\FileUtils.cs" />
     <Compile Include="Tools\IContentWindow.cs" />
     <Compile Include="Tools\NavigationModel.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="ViewModels\EditorViewModel.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\HelpViewModel.cs" />
+    <Compile Include="ViewModels\HistoryWindowViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\Authentication\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
@@ -126,6 +129,9 @@
     </Compile>
     <Compile Include="Views\HelpDialog.xaml.cs">
       <DependentUpon>HelpDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistoryWindow.xaml.cs">
+      <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -162,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HelpDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HistoryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

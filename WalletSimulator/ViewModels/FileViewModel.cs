@@ -1,12 +1,11 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing.Text;
+using Microsoft.Win32;
 using System.Windows.Input;
 using KMA.APZRPMJ2018.WalletSimulator.Models;
+using System.IO;
+using System.Runtime.CompilerServices;
+using KMA.APZRPMJ2018.WalletSimulator.Tools;
+using KMA.APZRPMJ2018.WalletSimulator.Managers;
 
 namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
 {
@@ -16,7 +15,8 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
     public class FileViewModel
     {
         public DocumentModel Document { get; private set; }
-
+        private string _lastOpenedDocumentHash;
+        
         //Toolbar commands
         public ICommand NewCommand { get; }
         public ICommand SaveCommand { get; }
@@ -37,11 +37,13 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
             Document.FileName = string.Empty;
             Document.FilePath = string.Empty;
             Document.Text = string.Empty;
+            StationManager.CurrentFilepath = Document.FilePath;
         }
 
         private void SaveFile()
         {
             File.WriteAllText(Document.FilePath, Document.Text);
+            RecordQuery();
         }
 
         private void SaveFileAs()
@@ -52,6 +54,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
             {
                 DockFile(saveFileDialog);
                 File.WriteAllText(saveFileDialog.FileName, Document.Text);
+                RecordQuery();
             }
         }
 
@@ -61,8 +64,21 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 DockFile(openFileDialog);
+                RecordQuery(true);
                 Document.Text = File.ReadAllText(openFileDialog.FileName);
             }
+        }
+
+        private void RecordQuery(bool isOpened = false)
+        {
+            var currentHash = FileUtils.CalculateMD5(Document.FilePath);
+            var edited = !isOpened && _lastOpenedDocumentHash != currentHash;
+            _lastOpenedDocumentHash = currentHash;
+            StationManager.CurrentFilepath = Document.FilePath;
+            StationManager.CurrentUser.AddQuery(
+                Document.FilePath, 
+                isOpened ? QueryType.OPENED : (edited ? QueryType.EDITED : QueryType.NOT_EDITED)
+            );
         }
 
         private void DockFile<T>(T dialog) where T : FileDialog

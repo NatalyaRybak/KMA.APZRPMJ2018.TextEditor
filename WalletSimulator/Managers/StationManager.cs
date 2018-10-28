@@ -7,6 +7,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Managers
     public static class StationManager
     {
         public static User CurrentUser { get; set; }
+        public static string CurrentFilepath { get; set; }
 
         public static void Initialize()
         {

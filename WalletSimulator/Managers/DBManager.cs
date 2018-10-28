@@ -10,7 +10,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.Managers
 
         static DBManager()
         {
-            Users.Add(new User("Nata", "Rybak", "email@gmail.com", "n", "r"));
+            AddUser(new User("Nata", "Rybak", "email@gmail.com", "n", "r"));
         }
 
         public static bool UserExists(string login)

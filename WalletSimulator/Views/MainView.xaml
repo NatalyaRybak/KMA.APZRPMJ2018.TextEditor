@@ -22,6 +22,7 @@
                 <MenuItem Header="Help" DataContext="{Binding Help}">
                     <MenuItem Header="About" Command="{Binding HelpCommand}"/>
                 </MenuItem>
+                <MenuItem Header="History" Command="{Binding HistoryCommand}"/>
             </Menu.Items>
         </Menu>
 

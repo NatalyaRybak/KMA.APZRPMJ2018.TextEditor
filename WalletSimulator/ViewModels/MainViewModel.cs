@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using KMA.APZRPMJ2018.WalletSimulator.Models;
+using KMA.APZRPMJ2018.WalletSimulator.Views;
+using System.Windows;
+using System.Windows.Input;
+using KMA.APZRPMJ2018.WalletSimulator.Managers;
 
 namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
 {
@@ -20,6 +20,7 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
         public FileViewModel File { get; set; }
         //Manage help dialog
         public HelpViewModel Help { get; set; }
+        public ICommand HistoryCommand { get; }
 
         public MainViewModel()
         {
@@ -27,6 +28,15 @@ namespace KMA.APZRPMJ2018.WalletSimulator.ViewModels
             Help = new HelpViewModel();
             Editor = new EditorViewModel(_document);
             File = new FileViewModel(_document);
+            HistoryCommand = new RelayCommand(DisplayHistory);
+
+
+        }
+        private void DisplayHistory()
+        {
+            new HistoryWindow(
+                String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
+            ).Show();
         }
     }
 }

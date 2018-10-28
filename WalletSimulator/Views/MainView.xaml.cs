@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using KMA.APZRPMJ2018.WalletSimulator.Models;
 using KMA.APZRPMJ2018.WalletSimulator.ViewModels;
 
 namespace KMA.APZRPMJ2018.WalletSimulator
