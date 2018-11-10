@@ -22,8 +22,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
         public FileViewModel File { get; set; }
         //Manage help dialog
         public HelpViewModel Help { get; set; }
-        public ICommand _historyCommand { get; }
-        public ICommand _logOutCommand { get; }
+        public ICommand HistoryCommand { get; }
+        public ICommand LogOutCommand { get; }
 
         public MainViewModel()
         {
@@ -31,8 +31,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             Help = new HelpViewModel();
             Editor = new EditorViewModel(_document);
             File = new FileViewModel(_document);
-            _historyCommand = new RelayCommand(DisplayHistory);
-            _logOutCommand = new RelayCommand(LogOut);
+            HistoryCommand = new RelayCommand(DisplayHistory);
+            LogOutCommand = new RelayCommand(LogOut);
 
 
         }
