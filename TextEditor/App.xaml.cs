@@ -8,10 +8,10 @@ namespace KMA.APZRPMJ2018.TextEditor
     /// </summary>
     public partial class App
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            StationManager.Initialize();
-        }
+//        protected override void OnStartup(StartupEventArgs e)
+//        {
+//            base.OnStartup(e);
+//           // StationManager.Initialize();
+//        }
     }
 }

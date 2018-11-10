@@ -6,7 +6,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
     {
         OPENED, EDITED, NOT_EDITED
     }
-
+    [Serializable]
     public class Query
     {
         public readonly DateTime QueryDateTime;

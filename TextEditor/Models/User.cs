@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.Models
 {
+    [Serializable]
     public class User
     {
         #region Const
@@ -151,16 +151,30 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
 
             try
             {
-                string res = Encrypting.DecryptString(_password, PrivateKey);
+                //string res = Encrypting.DecryptString(_password, PrivateKey);
                 string res2 = Encrypting.GetMd5HashForString(password);
-                return res == res2;
+                return _password == res2;
             }
             catch (Exception)
             {
                 return false;
             }
         }
-        
+        public bool CheckPassword(User userCandidate)
+        {
+            try
+            {
+                //string res = Encrypting.DecryptString(_password, PrivateKey);
+                //string res2 = Encrypting.DecryptString(userCandidate._password, PrivateKey);
+                return _password == userCandidate._password;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
         public override string ToString()
         {
             return $"{LastName} {FirstName}";
