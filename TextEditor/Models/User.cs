@@ -144,7 +144,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
 
         private void SetPassword(string password)
         {
-            _password = Encrypting.EncryptText(password, PubblicKey);
+            _password = Encrypting.GetMd5HashForString(password);
         }
         public bool CheckPassword(string password)
         {
