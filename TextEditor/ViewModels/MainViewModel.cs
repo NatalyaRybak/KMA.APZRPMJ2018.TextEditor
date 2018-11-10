@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Input;
 using KMA.APZRPMJ2018.TextEditor.Views;
 using KMA.APZRPMJ2018.TextEditor.Managers;
+using KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication;
+using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
@@ -20,7 +22,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
         public FileViewModel File { get; set; }
         //Manage help dialog
         public HelpViewModel Help { get; set; }
-        public ICommand HistoryCommand { get; }
+        public ICommand _historyCommand { get; }
+        public ICommand _logOutCommand { get; }
 
         public MainViewModel()
         {
@@ -28,7 +31,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             Help = new HelpViewModel();
             Editor = new EditorViewModel(_document);
             File = new FileViewModel(_document);
-            HistoryCommand = new RelayCommand(DisplayHistory);
+            _historyCommand = new RelayCommand(DisplayHistory);
+            _logOutCommand = new RelayCommand(LogOut);
 
 
         }
@@ -38,5 +42,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
             ).Show();
         }
+
+        private void LogOut()
+        {
+            NavigationManager.Instance.Navigate(ModesEnum.SignIn);
+        }
+
     }
 }

@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KMA.APZRPMJ2018.TextEditor"
         xmlns:viewmodels="clr-namespace:KMA.APZRPMJ2018.TextEditor.ViewModels"
+        xmlns:controls="clr-namespace:KMA.APZRPMJ2018.TextEditor.Tools.Controls"
+
         mc:Ignorable="d">
     <DockPanel Margin="1">
         <Menu DockPanel.Dock="Top">
@@ -23,6 +25,8 @@
                     <MenuItem Header="About" Command="{Binding HelpCommand}"/>
                 </MenuItem>
                 <MenuItem Header="History" Command="{Binding HistoryCommand}"/>
+                <MenuItem Header="Log out" Command="{Binding LogOutCommand}"/>
+
             </Menu.Items>
         </Menu>
 

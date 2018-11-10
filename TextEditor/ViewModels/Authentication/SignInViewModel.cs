@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
 {
-    internal class SignInViewModel : INotifyPropertyChanged
+    public class SignInViewModel : INotifyPropertyChanged
     {
         #region Fields
         private string _password;
