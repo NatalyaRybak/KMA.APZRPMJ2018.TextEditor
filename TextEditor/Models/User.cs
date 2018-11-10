@@ -125,6 +125,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         public void AddQuery(string filepath, QueryType type)
         {
             AddQuery(new Query(filepath, type));
+
         }
 
         public void AddQuery(Query q)

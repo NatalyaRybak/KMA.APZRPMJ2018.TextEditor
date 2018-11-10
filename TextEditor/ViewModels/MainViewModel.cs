@@ -45,7 +45,9 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         private void LogOut()
         {
+            DBManager.UpdateUser(StationManager.CurrentUser);
             NavigationManager.Instance.Navigate(ModesEnum.SignIn);
+
         }
 
     }

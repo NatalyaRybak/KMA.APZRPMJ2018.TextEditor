@@ -79,6 +79,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
                 Document.FilePath, 
                 isOpened ? QueryType.OPENED : (edited ? QueryType.EDITED : QueryType.NOT_EDITED)
             );
+            DBManager.UpdateUser(StationManager.CurrentUser);
+
         }
 
         private void DockFile<T>(T dialog) where T : FileDialog
