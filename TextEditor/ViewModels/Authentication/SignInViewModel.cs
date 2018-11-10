@@ -119,6 +119,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                     return false;
                 }
                 StationManager.CurrentUser = currentUser;
+                SerializationManager.Serialize(StationManager.CurrentUser, FileFolderHelper.LastUserFilePath);
+
                 return true;
             });
           //  LoaderManager.Instance.HideLoader();

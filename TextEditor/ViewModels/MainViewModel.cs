@@ -1,6 +1,7 @@
 ﻿using System;
 using KMA.APZRPMJ2018.TextEditor.Models;
 using System.Windows;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using KMA.APZRPMJ2018.TextEditor.Views;
 using KMA.APZRPMJ2018.TextEditor.Managers;
@@ -46,6 +47,10 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
         private void LogOut()
         {
             DBManager.UpdateUser(StationManager.CurrentUser);
+            _document.FilePath = string.Empty;
+            _document.FileName = string.Empty;
+            _document.Text = string.Empty;
+            StationManager.CurrentFilepath = string.Empty;
             NavigationManager.Instance.Navigate(ModesEnum.SignIn);
 
         }

@@ -149,6 +149,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                     return false;
                 }
                 MessageBox.Show(String.Format(Resources.SignUp_UserSuccessfulyCreated, _login));
+                SerializationManager.Serialize(StationManager.CurrentUser, FileFolderHelper.LastUserFilePath);
+
                 return true;
             });
             //LoaderManager.Instance.HideLoader();
