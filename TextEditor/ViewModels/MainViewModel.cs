@@ -8,6 +8,7 @@ using KMA.APZRPMJ2018.TextEditor.Tools;
 using System.Threading.Tasks;
 using Exception = System.Exception;
 using System.Threading;
+using System.Windows;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
@@ -47,7 +48,6 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         private async void LogOut()
         {
-<<<<<<< HEAD
             LoaderManager.Instance.ShowLoader();
             var result = await Task.Run(() =>
             {
@@ -72,15 +72,6 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
                 StationManager.CurrentFilepath = string.Empty;
                 NavigationManager.Instance.Navigate(ModesEnum.SignIn);
             }
-
-=======
-            DBManager.UpdateUser(StationManager.CurrentUser);
-            _document.FilePath = string.Empty;
-            _document.FileName = string.Empty;
-            _document.Text = string.Empty;
-            StationManager.CurrentFilepath = string.Empty;
-            NavigationManager.Instance.Navigate(ModesEnum.SignIn);
->>>>>>> b8e2a5523953d548b53c961e81fb79b60eb26d32
         }
 
     }
