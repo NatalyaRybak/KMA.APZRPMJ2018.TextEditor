@@ -113,7 +113,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
 
         private async void SignUpExecute(object obj)
         {
-          //  LoaderManager.Instance.ShowLoader();
+            LoaderManager.Instance.ShowLoader();
             var result = await Task.Run(() =>
             {
                 try
@@ -153,7 +153,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
 
                 return true;
             });
-            //LoaderManager.Instance.HideLoader();
+            LoaderManager.Instance.HideLoader();
             if (result)
                 NavigationManager.Instance.Navigate(ModesEnum.Main);
         }
