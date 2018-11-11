@@ -9,7 +9,6 @@ using KMA.APZRPMJ2018.TextEditor.Tools;
 using KMA.APZRPMJ2018.TextEditor.Managers;
 using KMA.APZRPMJ2018.TextEditor.Models;
 using System.Threading.Tasks;
-using System.Threading;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
 {
@@ -119,15 +118,17 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
             {
                 try
                 {
-                    Thread.Sleep(3000);
+                    //Thread.Sleep(3000);
                     if (!new EmailAddressAttribute().IsValid(_email))
                     {
                         MessageBox.Show(String.Format(Resources.SignUp_EmailIsNotValid, _email));
+                        Logger.Log("SignUp_EmailIsNotValid");
                         return false;
                     }
                     if (DBManager.UserExists(_login))
                     {
                         MessageBox.Show(String.Format(Resources.SignUp_UserAlreadyExists, _login));
+                        Logger.Log("SignUp_UserAlreadyExists");
                         return false;
                     }
                 }
@@ -135,6 +136,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 {
                     MessageBox.Show(String.Format(Resources.SignUp_FailedToValidateData, Environment.NewLine,
                         ex.Message));
+                    Logger.Log($"SignUp_FailedToValidateData",ex);
                     return false;
                 }
                 try
@@ -147,9 +149,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 {
                     MessageBox.Show(String.Format(Resources.SignUp_FailedToCreateUser, Environment.NewLine,
                         ex.Message));
+                    Logger.Log($"SignUp_FailedToCreateUser", ex);
                     return false;
                 }
                 MessageBox.Show(String.Format(Resources.SignUp_UserSuccessfulyCreated, _login));
+                Logger.Log("SignUp_UserSuccessfulyCreated");
                 SerializationManager.Serialize(StationManager.CurrentUser, FileFolderHelper.LastUserFilePath);
 
                 return true;

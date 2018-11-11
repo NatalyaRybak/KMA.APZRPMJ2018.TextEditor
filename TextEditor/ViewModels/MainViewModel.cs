@@ -3,11 +3,9 @@ using KMA.APZRPMJ2018.TextEditor.Models;
 using System.Windows.Input;
 using KMA.APZRPMJ2018.TextEditor.Views;
 using KMA.APZRPMJ2018.TextEditor.Managers;
-using KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication;
 using KMA.APZRPMJ2018.TextEditor.Tools;
 using System.Threading.Tasks;
 using Exception = System.Exception;
-using System.Threading;
 using System.Windows;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
@@ -53,13 +51,14 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             {
                 try
                 {
-                    Thread.Sleep(1000);
+                  //  Thread.Sleep(1000);
                     DBManager.UpdateUser(StationManager.CurrentUser);
                     return true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    Logger.Log($"Update user exception ", ex);
                     return false;
                 }
             });

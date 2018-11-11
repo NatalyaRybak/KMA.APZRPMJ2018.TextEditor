@@ -8,7 +8,6 @@ using KMA.APZRPMJ2018.TextEditor.Tools;
 using KMA.APZRPMJ2018.TextEditor.Managers;
 using KMA.APZRPMJ2018.TextEditor.Models;
 using System.Threading.Tasks;
-using System.Threading;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
 {
@@ -92,18 +91,22 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 User currentUser;
                 try
                 {
-                    Thread.Sleep(3000);
+                    //Thread.Sleep(3000);
                     currentUser = DBManager.GetUserByLogin(_login);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(String.Format(Resources.SignIn_FailedToGetUser, Environment.NewLine,
                         ex.Message));
+                    Logger.Log($"SignIn_FailedToGetUser",ex);
+
                     return false;
                 }
                 if (currentUser == null)
                 {
                     MessageBox.Show(String.Format(Resources.SignIn_UserDoesntExist, _login));
+                    Logger.Log("SignIn_UserDoesntExist");
+
                     return false;
                 }
                 try
@@ -111,6 +114,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                     if (!currentUser.CheckPassword(_password))
                     {
                         MessageBox.Show(Resources.SignIn_WrongPassword);
+                        Logger.Log("SignIn_WrongPassword");
+
                         return false;
                     }
                 }
@@ -118,6 +123,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 {
                     MessageBox.Show(String.Format(Resources.SignIn_FailedToValidatePassword, Environment.NewLine,
                         ex.Message));
+                    Logger.Log("SignIn_FailedToValidatePassword",ex);
+
                     return false;
                 }
                 StationManager.CurrentUser = currentUser;

@@ -1,9 +1,7 @@
-﻿using System.Drawing.Text;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System.Windows.Input;
 using KMA.APZRPMJ2018.TextEditor.Models;
 using System.IO;
-using System.Runtime.CompilerServices;
 using KMA.APZRPMJ2018.TextEditor.Tools;
 using KMA.APZRPMJ2018.TextEditor.Managers;
 
@@ -38,12 +36,16 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             Document.FilePath = string.Empty;
             Document.Text = string.Empty;
             StationManager.CurrentFilepath = Document.FilePath;
+            Logger.Log("New File");
+
         }
 
         private void SaveFile()
         {
             File.WriteAllText(Document.FilePath, Document.Text);
             RecordQuery();
+            Logger.Log("Save File");
+
         }
 
         private void SaveFileAs()
@@ -55,6 +57,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
                 DockFile(saveFileDialog);
                 File.WriteAllText(saveFileDialog.FileName, Document.Text);
                 RecordQuery();
+                Logger.Log("Save As File");
+
             }
         }
 
@@ -66,6 +70,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
                 DockFile(openFileDialog);
                 RecordQuery(true);
                 Document.Text = File.ReadAllText(openFileDialog.FileName);
+                Logger.Log("Open File");
+
             }
         }
 

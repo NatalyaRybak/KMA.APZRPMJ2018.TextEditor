@@ -1,4 +1,6 @@
-﻿using KMA.APZRPMJ2018.TextEditor.Tools;
+﻿using System;
+using KMA.APZRPMJ2018.TextEditor.Tools;
+using Exception = System.Exception;
 
 namespace KMA.APZRPMJ2018.TextEditor.Managers
 {
@@ -56,7 +58,21 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
         internal void Navigate(ModesEnum mode)
         {
             //If _navigationModel is null, nothing will happen
-            _navigationModel?.Navigate(mode);
+            try
+            {
+                if (_navigationModel != null)
+                {
+                    _navigationModel?.Navigate(mode);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log($"Failed to navigate", ex);
+            }
         }
 
     }

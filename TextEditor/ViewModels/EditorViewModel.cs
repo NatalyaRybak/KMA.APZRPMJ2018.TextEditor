@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using KMA.APZRPMJ2018.TextEditor.Models;
+using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
@@ -26,6 +27,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             var fontDialog = new FontDialog();
             fontDialog.DataContext = Format;
             fontDialog.ShowDialog();
+            Logger.Log("OpenStyleDialog");
         }
 
         private void ToggleWrap()

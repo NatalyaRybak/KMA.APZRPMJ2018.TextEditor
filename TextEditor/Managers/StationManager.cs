@@ -23,7 +23,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
             LoaderManager.Instance.ShowLoader();
             var result = await Task.Run(() =>
             {
-                Thread.Sleep(3000);
+               // Thread.Sleep(3000);
 
                 User userCandidate;
                 userCandidate = SerializationManager.Deserialize<User>(Path.Combine(FileFolderHelper.LastUserFilePath));
@@ -55,6 +55,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
         {
             SerializationManager.Serialize(CurrentUser, FileFolderHelper.LastUserFilePath);
             MessageBox.Show("ShutDown");
+            Logger.Log("ShutDown");
             Environment.Exit(1);
         }
     }

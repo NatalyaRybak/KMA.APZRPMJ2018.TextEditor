@@ -37,9 +37,9 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
                     file.Create().Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Logger.Log($"Failed to check and create file {filePath}", ex);
                 throw;
             }
         }
