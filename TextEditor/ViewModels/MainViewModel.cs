@@ -1,7 +1,5 @@
 ﻿using System;
 using KMA.APZRPMJ2018.TextEditor.Models;
-using System.Windows;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using KMA.APZRPMJ2018.TextEditor.Views;
 using KMA.APZRPMJ2018.TextEditor.Managers;
@@ -49,6 +47,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         private async void LogOut()
         {
+<<<<<<< HEAD
             LoaderManager.Instance.ShowLoader();
             var result = await Task.Run(() =>
             {
@@ -74,6 +73,14 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
                 NavigationManager.Instance.Navigate(ModesEnum.SignIn);
             }
 
+=======
+            DBManager.UpdateUser(StationManager.CurrentUser);
+            _document.FilePath = string.Empty;
+            _document.FileName = string.Empty;
+            _document.Text = string.Empty;
+            StationManager.CurrentFilepath = string.Empty;
+            NavigationManager.Instance.Navigate(ModesEnum.SignIn);
+>>>>>>> b8e2a5523953d548b53c961e81fb79b60eb26d32
         }
 
     }

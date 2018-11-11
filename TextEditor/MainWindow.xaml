@@ -8,6 +8,10 @@
         Title="TextEditor" MinHeight="500" MinWidth="700">
     <Grid>
         <ContentControl Name="_contentControl" IsEnabled="{Binding Path=IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+<<<<<<< HEAD
         <fa:ImageAwesome Name="ImageAwesome"  Icon="Spinner" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Spin="True" Visibility="{Binding Path=LoaderVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+=======
+        <fa:ImageAwesome Name="ImageAwesome"  Icon="Refresh" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Spin="True" Visibility="{Binding Path=LoaderVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+>>>>>>> b8e2a5523953d548b53c961e81fb79b60eb26d32
     </Grid>
 </Window>
