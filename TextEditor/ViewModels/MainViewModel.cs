@@ -7,6 +7,9 @@ using KMA.APZRPMJ2018.TextEditor.Views;
 using KMA.APZRPMJ2018.TextEditor.Managers;
 using KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication;
 using KMA.APZRPMJ2018.TextEditor.Tools;
+using System.Threading.Tasks;
+using Exception = System.Exception;
+using System.Threading;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
@@ -44,14 +47,32 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             ).Show();
         }
 
-        private void LogOut()
+        private async void LogOut()
         {
-            DBManager.UpdateUser(StationManager.CurrentUser);
-            _document.FilePath = string.Empty;
-            _document.FileName = string.Empty;
-            _document.Text = string.Empty;
-            StationManager.CurrentFilepath = string.Empty;
-            NavigationManager.Instance.Navigate(ModesEnum.SignIn);
+            LoaderManager.Instance.ShowLoader();
+            var result = await Task.Run(() =>
+            {
+                try
+                {
+                    Thread.Sleep(1000);
+                    DBManager.UpdateUser(StationManager.CurrentUser);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+            });
+            LoaderManager.Instance.HideLoader();
+            if (result)
+            {
+                _document.FilePath = string.Empty;
+                _document.FileName = string.Empty;
+                _document.Text = string.Empty;
+                StationManager.CurrentFilepath = string.Empty;
+                NavigationManager.Instance.Navigate(ModesEnum.SignIn);
+            }
 
         }
 
