@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using KMA.APZRPMJ2018.TextEditor.Models;
-using KMA.APZRPMJ2018.TextEditor.Tools;
+﻿using KMA.APZRPMJ2018.TextEditor.Models;
 
 namespace KMA.APZRPMJ2018.TextEditor.Managers
 {

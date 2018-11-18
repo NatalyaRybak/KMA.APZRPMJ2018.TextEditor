@@ -1,6 +1,5 @@
 namespace KMA.APZRPMJ2018.TextEditor
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class InitialMigration : DbMigration

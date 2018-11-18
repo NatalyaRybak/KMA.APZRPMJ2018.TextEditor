@@ -21,10 +21,7 @@ namespace KMA.APZRPMJ2018.TextEditor
             using (var context = new EditorDBContext())
             {
                 var user =  context.Users.Include(u=>u.Queries).FirstOrDefault(u => u.Login == login);
-               // var user = context.Users.Where(u => u.Login == login).First();
-               //var user = context.Users.First();
-
-                return user;
+              return user;
             }
         }
 
@@ -67,7 +64,6 @@ namespace KMA.APZRPMJ2018.TextEditor
         {
             using (var context = new EditorDBContext())
             {
-                //обнуляє посилання на користувача
                 query.DeleteDatabaseValues();
                 context.Entry(query).State = EntityState.Modified;
                 context.SaveChanges();

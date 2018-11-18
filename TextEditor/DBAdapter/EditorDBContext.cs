@@ -1,10 +1,5 @@
 ﻿using KMA.APZRPMJ2018.TextEditor.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KMA.APZRPMJ2018.TextEditor
 {

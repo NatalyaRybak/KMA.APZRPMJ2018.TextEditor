@@ -73,7 +73,6 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 User currentUser;
                 try
                 {
-                    //Thread.Sleep(3000);
                     currentUser = DbManager.GetUserByLogin(_login);
                 }
                 catch (Exception ex)
