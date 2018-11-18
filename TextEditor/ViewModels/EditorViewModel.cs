@@ -18,11 +18,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
         {
             Document = document;
             Format = new FormatModel();
-            FormatCommand = new RelayCommand(OpenStyleDialog);
-            WrapCommand = new RelayCommand(ToggleWrap);
+            FormatCommand = new RelayCommand<object>(OpenStyleDialog);
+            WrapCommand = new RelayCommand<object>(ToggleWrap);
         }
 
-        private void OpenStyleDialog()
+        private void OpenStyleDialog(object obj)
         {
             var fontDialog = new FontDialog();
             fontDialog.DataContext = Format;
@@ -30,7 +30,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             Logger.Log("OpenStyleDialog");
         }
 
-        private void ToggleWrap()
+        private void ToggleWrap(object obj)
         {
             if (Format.Wrap == System.Windows.TextWrapping.Wrap)
                 Format.Wrap = System.Windows.TextWrapping.NoWrap;

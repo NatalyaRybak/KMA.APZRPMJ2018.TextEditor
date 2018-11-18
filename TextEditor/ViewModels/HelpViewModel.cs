@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
@@ -11,10 +12,10 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         public HelpViewModel()
         {
-            HelpCommand = new RelayCommand(DisplayAbout);
+            HelpCommand = new RelayCommand<object>(DisplayAbout);
         }
 
-        private void DisplayAbout()
+        private void DisplayAbout(object obj)
         {
             var helpDialog = new HelpDialog();
             helpDialog.ShowDialog();

@@ -125,7 +125,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                         Logger.Log("SignUp_EmailIsNotValid");
                         return false;
                     }
-                    if (DBManager.UserExists(_login))
+                    if (DbManager.UserExists(_login))
                     {
                         MessageBox.Show(String.Format(Resources.SignUp_UserAlreadyExists, _login));
                         Logger.Log("SignUp_UserAlreadyExists");
@@ -142,7 +142,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 try
                 {
                     var user = new User(_firstName, _lastName, _email, _login, _password);
-                    DBManager.AddUser(user);
+                    DbManager.AddUser(user);
                     StationManager.CurrentUser = user;
                 }
                 catch (Exception ex)

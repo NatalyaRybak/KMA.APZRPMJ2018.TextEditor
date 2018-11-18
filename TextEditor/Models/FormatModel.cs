@@ -1,8 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.Models
 {
+    /// <inheritdoc />
     /// <summary>
     /// Model for document format properties.
     /// </summary>
@@ -11,47 +13,47 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         private FontStyle _style;
         public FontStyle Style
         {
-            get { return _style; }
-            set { OnPropertyChanged(ref _style, value); }
+            get => _style;
+            set => OnPropertyChanged(ref _style, value);
         }
 
         private FontWeight _weight;
         public FontWeight Weight
         {
-            get { return _weight; }
-            set { OnPropertyChanged(ref _weight, value); }
+            get => _weight;
+            set => OnPropertyChanged(ref _weight, value);
         }
 
         private FontFamily _family;
         public FontFamily Family
         {
-            get { return _family; }
-            set { OnPropertyChanged(ref _family, value); }
+            get => _family;
+            set => OnPropertyChanged(ref _family, value);
         }
 
         private TextWrapping _wrap;
         public TextWrapping Wrap
         {
-            get { return _wrap; }
+            get => _wrap;
             set
             {
                 OnPropertyChanged(ref _wrap, value);
-                isWrapped = value == TextWrapping.Wrap ? true : false;
+                IsWrapped = value == TextWrapping.Wrap ? true : false;
             }
         }
 
         private bool _isWrapped;
-        public bool isWrapped
+        public bool IsWrapped
         {
-            get { return _isWrapped; }
-            set { OnPropertyChanged(ref _isWrapped, value); }
+            get => _isWrapped;
+            set => OnPropertyChanged(ref _isWrapped, value);
         }
 
         private double _size;
         public double Size
         {
-            get { return _size; }
-            set { OnPropertyChanged(ref _size, value); }
+            get => _size;
+            set => OnPropertyChanged(ref _size, value);
         }
     }
 }

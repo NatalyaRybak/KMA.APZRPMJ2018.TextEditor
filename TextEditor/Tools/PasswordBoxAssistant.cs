@@ -50,8 +50,8 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
                 return;
             }
 
-            bool wasBound = (bool)e.OldValue;
-            bool needToBind = (bool)e.NewValue;
+            var wasBound = (bool)e.OldValue;
+            var needToBind = (bool)e.NewValue;
 
             if (wasBound)
             {

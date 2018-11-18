@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KMA.APZRPMJ2018.TextEditor
+namespace KMA.APZRPMJ2018.TextEditor.Tools
 {
     /// <summary>
     /// Base class for objects that require property notification.

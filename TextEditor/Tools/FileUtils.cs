@@ -6,7 +6,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
 {
     public class FileUtils
     {
-        public static string CalculateMD5(string filename)
+        public static string CalculateMd5(string filename)
         {
             using (var md5 = MD5.Create())
             {

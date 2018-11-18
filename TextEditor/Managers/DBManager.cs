@@ -5,11 +5,11 @@ using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.Managers
 {
-    internal class DBManager
+    internal class DbManager
     {
         private static readonly List<User> Users;
 
-        static DBManager()
+        static DbManager()
         {
             Users = SerializationManager.Deserialize<List<User>>(FileFolderHelper.StorageFilePath) ?? new List<User>();
         }

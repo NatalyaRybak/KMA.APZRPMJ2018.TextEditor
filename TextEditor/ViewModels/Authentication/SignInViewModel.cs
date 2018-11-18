@@ -27,7 +27,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
         #region Properties
         public string Password
         {
-            get { return _password; }
+            get => _password;
             set
             {
                 _password = value;
@@ -36,7 +36,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
         }
         public string Login
         {
-            get { return _login; }
+            get => _login;
             set
             {
                 _login = value;
@@ -45,29 +45,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
         }
         #region Commands
 
-        public ICommand CloseCommand
-        {
-            get
-            {
-                return _closeCommand ?? (_closeCommand = new RelayCommand<object>(CloseExecute));
-            }
-        }
+        public ICommand CloseCommand => _closeCommand ?? (_closeCommand = new RelayCommand<object>(CloseExecute));
 
-        public ICommand SignInCommand
-        {
-            get
-            {
-                return _signInCommand ?? (_signInCommand = new RelayCommand<object>(SignInExecute, SignInCanExecute));
-            }
-        }
+        public ICommand SignInCommand => _signInCommand ?? (_signInCommand = new RelayCommand<object>(SignInExecute, SignInCanExecute));
 
-        public ICommand SignUpCommand
-        {
-            get
-            {
-                return _signUpCommand ?? (_signUpCommand = new RelayCommand<object>(SignUpExecute));
-            }
-        }
+        public ICommand SignUpCommand => _signUpCommand ?? (_signUpCommand = new RelayCommand<object>(SignUpExecute));
 
         #endregion
         #endregion
@@ -92,7 +74,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 try
                 {
                     //Thread.Sleep(3000);
-                    currentUser = DBManager.GetUserByLogin(_login);
+                    currentUser = DbManager.GetUserByLogin(_login);
                 }
                 catch (Exception ex)
                 {
@@ -134,7 +116,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
             });
             LoaderManager.Instance.HideLoader();
             if (result)
+            {
+                Login = string.Empty;
+                Password = string.Empty;
                 NavigationManager.Instance.Navigate(ModesEnum.Main);
+            }
         }
 
         private bool SignInCanExecute(object obj)

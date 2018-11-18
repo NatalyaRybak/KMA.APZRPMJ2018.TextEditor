@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6DE9FC7C-BD79-448F-A7A4-C5C468BD3F3F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>KMA.APZRPMJ2018.WalletSimulator</RootNamespace>
-    <AssemblyName>WalletSimulator</AssemblyName>
+    <RootNamespace>KMA.APZRPMJ2018.TextEditor</RootNamespace>
+    <AssemblyName>TextEditor</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -108,8 +108,7 @@
     <Compile Include="Models\FormatModel.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="ObservableObject.cs" />
-    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Tools\ObservableObject.cs" />
     <Compile Include="Tools\Controls\LabelAndTextControl.xaml.cs">
       <DependentUpon>LabelAndTextControl.xaml</DependentUpon>
     </Compile>

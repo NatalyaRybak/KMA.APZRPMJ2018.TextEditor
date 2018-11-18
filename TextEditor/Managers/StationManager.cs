@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using KMA.APZRPMJ2018.TextEditor.Models;
@@ -18,21 +17,20 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
             DeserializeLastUser();
         }
 
-        private async static void DeserializeLastUser()
+        private static async void DeserializeLastUser()
         {
             LoaderManager.Instance.ShowLoader();
             var result = await Task.Run(() =>
             {
                // Thread.Sleep(3000);
 
-                User userCandidate;
-                userCandidate = SerializationManager.Deserialize<User>(Path.Combine(FileFolderHelper.LastUserFilePath));
+                var userCandidate = SerializationManager.Deserialize<User>(Path.Combine(FileFolderHelper.LastUserFilePath));
                 if (userCandidate == null)
                 {
                      Logger.Log("User was not deserialized");
                      return false;
                 }
-                userCandidate = DBManager.CheckCachedUser(userCandidate);
+                userCandidate = DbManager.CheckCachedUser(userCandidate);
                 if (userCandidate == null)
                 {
                     MessageBox.Show("Failed to relogin last user");
@@ -53,8 +51,6 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
 
         internal static void CloseApp()
         {
-            SerializationManager.Serialize(CurrentUser, FileFolderHelper.LastUserFilePath);
-            MessageBox.Show("ShutDown");
             Logger.Log("ShutDown");
             Environment.Exit(1);
         }

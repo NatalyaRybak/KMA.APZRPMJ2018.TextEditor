@@ -7,7 +7,6 @@ using KMA.APZRPMJ2018.TextEditor.Tools;
 using System.Threading.Tasks;
 using Exception = System.Exception;
 using System.Windows;
-using System.Threading;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
@@ -33,27 +32,27 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             Help = new HelpViewModel();
             Editor = new EditorViewModel(_document);
             File = new FileViewModel(_document);
-            HistoryCommand = new RelayCommand(DisplayHistory);
-            LogOutCommand = new RelayCommand(LogOut);
+            HistoryCommand = new RelayCommand<object>(DisplayHistory);
+            LogOutCommand = new RelayCommand<object>(LogOut);
 
 
         }
-        private void DisplayHistory()
+        private void DisplayHistory(object obj)
         {
             new HistoryWindow(
-                   String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
-                ).Show();
-                
+            String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
+            ).Show();
         }
-        private async void LogOut()
+
+        private async void LogOut(object obj)
         {
             LoaderManager.Instance.ShowLoader();
             var result = await Task.Run(() =>
             {
                 try
                 {
-                  //  Thread.Sleep(1000);
-                    DBManager.UpdateUser(StationManager.CurrentUser);
+                    //  Thread.Sleep(1000);
+                    DbManager.UpdateUser(StationManager.CurrentUser);
                     return true;
                 }
                 catch (Exception ex)

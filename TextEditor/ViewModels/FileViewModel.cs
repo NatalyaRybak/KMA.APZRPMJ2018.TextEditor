@@ -24,13 +24,13 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
         public FileViewModel(DocumentModel document)
         {
             Document = document;
-            NewCommand = new RelayCommand(NewFile);
-            SaveCommand = new RelayCommand(SaveFile, () => !Document.isEmpty);
-            SaveAsCommand = new RelayCommand(SaveFileAs);
-            OpenCommand = new RelayCommand(OpenFile);
+            NewCommand = new RelayCommand<object>(NewFile);
+            SaveCommand = new RelayCommand<object>(SaveFile, obj => !Document.IsEmpty);
+            SaveAsCommand = new RelayCommand<object>(SaveFileAs);
+            OpenCommand = new RelayCommand<object>(OpenFile);
         }
 
-        public void NewFile()
+        public void NewFile(object obj)
         {
             Document.FileName = string.Empty;
             Document.FilePath = string.Empty;
@@ -40,7 +40,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         }
 
-        private void SaveFile()
+        private void SaveFile(object obj)
         {
             File.WriteAllText(Document.FilePath, Document.Text);
             RecordQuery();
@@ -48,7 +48,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         }
 
-        private void SaveFileAs()
+        private void SaveFileAs(object obj)
         {
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text File (*.txt)|*.txt";
@@ -62,7 +62,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             }
         }
 
-        private void OpenFile()
+        private void OpenFile(object obj)
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
@@ -77,15 +77,15 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         private void RecordQuery(bool isOpened = false)
         {
-            var currentHash = FileUtils.CalculateMD5(Document.FilePath);
+            var currentHash = FileUtils.CalculateMd5(Document.FilePath);
             var edited = !isOpened && _lastOpenedDocumentHash != currentHash;
             _lastOpenedDocumentHash = currentHash;
             StationManager.CurrentFilepath = Document.FilePath;
             StationManager.CurrentUser.AddQuery(
                 Document.FilePath, 
-                isOpened ? QueryType.OPENED : (edited ? QueryType.EDITED : QueryType.NOT_EDITED)
+                isOpened ? QueryType.Opened : (edited ? QueryType.Edited : QueryType.NotEdited)
             );
-            DBManager.UpdateUser(StationManager.CurrentUser);
+            DbManager.UpdateUser(StationManager.CurrentUser);
 
         }
 

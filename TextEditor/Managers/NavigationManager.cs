@@ -1,5 +1,4 @@
-﻿using System;
-using KMA.APZRPMJ2018.TextEditor.Tools;
+﻿using KMA.APZRPMJ2018.TextEditor.Tools;
 using Exception = System.Exception;
 
 namespace KMA.APZRPMJ2018.TextEditor.Managers

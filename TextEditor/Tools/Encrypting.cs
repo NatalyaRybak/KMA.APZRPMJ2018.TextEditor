@@ -15,7 +15,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
         }
         public static string GetMd5HashForString(string text)
         {
-            MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
+            var md5Hasher = new MD5CryptoServiceProvider();
 
             var hashValue = md5Hasher.ComputeHash(ConvertStringToByteArray(text));
             var hashData = BitConverter.ToString(hashValue);
@@ -25,14 +25,14 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
         }
         public static string DecryptString(string inputString, string xmlString)
         {
-            RSACryptoServiceProvider rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
+            var rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
             rsaCryptoServiceProvider.FromXmlString(xmlString);
-            int base64BlockSize = 128 / 3 * 4 + 4;
-            int iterations = inputString.Length / base64BlockSize;
-            ArrayList arrayList = new ArrayList();
-            for (int i = 0; i < iterations; i++)
+            const int base64BlockSize = 128 / 3 * 4 + 4;
+            var iterations = inputString.Length / base64BlockSize;
+            var arrayList = new ArrayList();
+            for (var i = 0; i < iterations; i++)
             {
-                byte[] encryptedBytes = Convert.FromBase64String(inputString.Substring(base64BlockSize * i, base64BlockSize));
+                var encryptedBytes = Convert.FromBase64String(inputString.Substring(base64BlockSize * i, base64BlockSize));
                 Array.Reverse(encryptedBytes);
                 arrayList.AddRange(rsaCryptoServiceProvider.Decrypt(encryptedBytes, true));
             }
@@ -41,19 +41,19 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
 
         private static string EncryptString(string inputString, string xmlString)
         {
-            RSACryptoServiceProvider rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
+            var rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
             rsaCryptoServiceProvider.FromXmlString(xmlString);
-            int keySize = 128;
-            byte[] bytes = Encoding.UTF32.GetBytes(inputString);
-            int maxLength = keySize - 42;
-            int dataLength = bytes.Length;
-            int iterations = dataLength / maxLength;
+            var keySize = 128;
+            var bytes = Encoding.UTF32.GetBytes(inputString);
+            var maxLength = keySize - 42;
+            var dataLength = bytes.Length;
+            var iterations = dataLength / maxLength;
             var stringBuilder = new StringBuilder();
-            for (int i = 0; i <= iterations; i++)
+            for (var i = 0; i <= iterations; i++)
             {
                 var tempBytes = new byte[(dataLength - maxLength * i > maxLength) ? maxLength : dataLength - maxLength * i];
                 Buffer.BlockCopy(bytes, maxLength * i, tempBytes, 0, tempBytes.Length);
-                byte[] encryptedBytes = rsaCryptoServiceProvider.Encrypt(tempBytes, true);
+                var encryptedBytes = rsaCryptoServiceProvider.Encrypt(tempBytes, true);
                 Array.Reverse(encryptedBytes);
                 stringBuilder.Append(Convert.ToBase64String(encryptedBytes));
             }

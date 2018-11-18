@@ -21,13 +21,12 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
                 }
                 catch
                 {
+                    // ignored
                 }
                 finally
                 {
                     writer?.Close();
                     file?.Close();
-                    writer = null;
-                    file = null;
                 }
             }
         }

@@ -4,7 +4,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
 {
     public enum QueryType
     {
-        OPENED, EDITED, NOT_EDITED
+        Opened, Edited, NotEdited
     }
     [Serializable]
     public class Query
