@@ -43,9 +43,7 @@ namespace KMA.APZRPMJ2018.TextEditor
                 return context.Users.Where(u => u.Queries.All(r => r.Guid != queryGuid)).ToList();
             }
         }
-
-
-
+        
         public static void AddUser(User user)
         {
             using (var context = new EditorDBContext())

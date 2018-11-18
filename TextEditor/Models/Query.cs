@@ -7,7 +7,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
     {
         Opened, Edited, NotEdited
     }
-    
+    [Serializable]
     public class Query
     {
         #region Fields
