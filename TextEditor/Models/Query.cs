@@ -7,7 +7,6 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
     {
         Opened, Edited, NotEdited
     }
-    [Serializable]
     public class Query
     {
         #region Fields
@@ -18,10 +17,6 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         private string _filepath;
         private QueryType _type;
         #endregion
-//        public readonly DateTime QueryDateTime;
-//        public readonly string Filepath;
-//        public readonly QueryType Type;
-
 
         #region Properties
         public Guid Guid

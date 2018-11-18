@@ -20,8 +20,6 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         #endregion
 
         #region Fields
-
-        private List<Query> _queries;
         private Guid _guid;
         private string _firstName;
         private string _lastName;
@@ -29,6 +27,9 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         private string _login;
         private string _password;
         private DateTime _lastLoginDate;
+
+        [NonSerialized]
+        private List<Query> _queries;
         #endregion
 
         #region Properties
