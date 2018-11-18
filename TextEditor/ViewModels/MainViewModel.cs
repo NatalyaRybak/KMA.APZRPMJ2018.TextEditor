@@ -7,6 +7,7 @@ using KMA.APZRPMJ2018.TextEditor.Tools;
 using System.Threading.Tasks;
 using Exception = System.Exception;
 using System.Windows;
+using System.Threading;
 
 namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 {
@@ -39,11 +40,12 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
         }
         private void DisplayHistory()
         {
-            new HistoryWindow(
-            String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
-            ).Show();
+            
+                new HistoryWindow(
+                    String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
+                ).Show();
+                
         }
-
         private async void LogOut()
         {
             LoaderManager.Instance.ShowLoader();
