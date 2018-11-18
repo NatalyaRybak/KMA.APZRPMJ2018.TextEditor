@@ -7,45 +7,32 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
 {
     internal class DbManager
     {
-        private static readonly List<User> Users;
-
-        static DbManager()
+        public static bool UserExists(string login)
         {
-            Users = SerializationManager.Deserialize<List<User>>(FileFolderHelper.StorageFilePath) ?? new List<User>();
+            return EntityWrapper.UserExists(login);
         }
 
-        internal static bool UserExists(string login)
+        public static User GetUserByLogin(string login)
         {
-            return Users.Any(u => u.Login == login);
-        }
-
-        internal static User GetUserByLogin(string login)
-        {
-            return Users.FirstOrDefault(u => u.Login == login);
+            return EntityWrapper.GetUserByLogin(login);
         }
 
         internal static void AddUser(User user)
         {
-            Users.Add(user);
-            SaveChanges();
-        }
-
-        private static void SaveChanges()
-        {
-            SerializationManager.Serialize(Users, FileFolderHelper.StorageFilePath);
+            EntityWrapper.AddUser(user);
         }
 
         internal static User CheckCachedUser(User userCandidate)
         {
-            var userInStorage = Users.FirstOrDefault(u => u.Guid == userCandidate.Guid);
+            var userInStorage = EntityWrapper.GetUserByGuid(userCandidate.Guid);
             if (userInStorage != null && userInStorage.CheckPassword(userCandidate))
                 return userInStorage;
             return null;
         }
 
-        public static void UpdateUser(User currentUser)
+        public static void AddQuery(Query query)
         {
-            SaveChanges();
+            EntityWrapper.AddQuery(query);
         }
 
     }

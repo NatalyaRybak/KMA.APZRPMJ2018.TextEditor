@@ -154,7 +154,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
                 }
                 MessageBox.Show(String.Format(Resources.SignUp_UserSuccessfulyCreated, _login));
                 Logger.Log("SignUp_UserSuccessfulyCreated");
-                SerializationManager.Serialize(StationManager.CurrentUser, FileFolderHelper.LastUserFilePath);
+                //SerializationManager.Serialize(StationManager.CurrentUser, FileFolderHelper.LastUserFilePath);
 
                 return true;
             });

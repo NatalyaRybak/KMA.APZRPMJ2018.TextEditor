@@ -139,6 +139,12 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
             SetPassword(password);
         }
 
+        private User()
+        {
+            _queries = new List<Query>();
+        }
+
+
         public void AddQuery(string filepath, QueryType type)
         {
             AddQuery(new Query(filepath, type,this));

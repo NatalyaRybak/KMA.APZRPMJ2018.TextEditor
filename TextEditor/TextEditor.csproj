@@ -99,6 +99,7 @@
     </ApplicationDefinition>
     <Compile Include="Configuration.cs" />
     <Compile Include="EditorDBContext.cs" />
+    <Compile Include="EntityWrapper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -106,6 +107,10 @@
     <Compile Include="Managers\NavigationManager.cs" />
     <Compile Include="Managers\DBManager.cs" />
     <Compile Include="Managers\SerializationManager.cs" />
+    <Compile Include="Migrations\201811180832034_InitialMigration.cs" />
+    <Compile Include="Migrations\201811180832034_InitialMigration.Designer.cs">
+      <DependentUpon>201811180832034_InitialMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DocumentModel.cs" />
     <Compile Include="Models\FormatModel.cs" />
     <Compile Include="Models\Query.cs" />
@@ -209,6 +214,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201811180832034_InitialMigration.resx">
+      <DependentUpon>201811180832034_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resource.ua.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

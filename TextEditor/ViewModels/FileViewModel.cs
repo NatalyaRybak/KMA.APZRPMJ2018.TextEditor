@@ -81,12 +81,10 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             var edited = !isOpened && _lastOpenedDocumentHash != currentHash;
             _lastOpenedDocumentHash = currentHash;
             StationManager.CurrentFilepath = Document.FilePath;
-            StationManager.CurrentUser.AddQuery(
-                Document.FilePath, 
-                isOpened ? QueryType.Opened : (edited ? QueryType.Edited : QueryType.NotEdited)
-            );
-            DbManager.UpdateUser(StationManager.CurrentUser);
-
+            QueryType qType = isOpened ? QueryType.Opened : (edited ? QueryType.Edited : QueryType.NotEdited);
+            Query query = new Query(Document.FilePath,qType, StationManager.CurrentUser);
+            StationManager.CurrentUser.AddQuery(query);
+            DbManager.AddQuery(query);
         }
 
         private void DockFile<T>(T dialog) where T : FileDialog

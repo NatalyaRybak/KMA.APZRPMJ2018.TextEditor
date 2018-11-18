@@ -46,7 +46,6 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
             private set { _queryDateTime = value; }
 
         }
-
         public string Filepath
         {
             get { return _filepath; }
@@ -69,6 +68,11 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
             Type = type;
             _userGuid = user.Guid;
             _user = user;
+        }
+
+        private Query()
+        {
+
         }
 
         public override string ToString()
