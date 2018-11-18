@@ -40,9 +40,8 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
         }
         private void DisplayHistory()
         {
-            
-                new HistoryWindow(
-                    String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
+            new HistoryWindow(
+                   String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
                 ).Show();
                 
         }

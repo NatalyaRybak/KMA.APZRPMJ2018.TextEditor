@@ -1,0 +1,1037 @@
+diff --git a/TextEditor/Managers/DBManager.cs b/TextEditor/Managers/DBManager.cs
+index dc56d5a..b93f952 100644
+--- a/TextEditor/Managers/DBManager.cs
++++ b/TextEditor/Managers/DBManager.cs
+@@ -5,11 +5,11 @@ using KMA.APZRPMJ2018.TextEditor.Tools;
+ 
+ namespace KMA.APZRPMJ2018.TextEditor.Managers
+ {
+-    internal class DBManager
++    internal class DbManager
+     {
+         private static readonly List<User> Users;
+ 
+-        static DBManager()
++        static DbManager()
+         {
+             Users = SerializationManager.Deserialize<List<User>>(FileFolderHelper.StorageFilePath) ?? new List<User>();
+         }
+diff --git a/TextEditor/Managers/NavigationManager.cs b/TextEditor/Managers/NavigationManager.cs
+index 264dcdb..65217a3 100644
+--- a/TextEditor/Managers/NavigationManager.cs
++++ b/TextEditor/Managers/NavigationManager.cs
+@@ -1,5 +1,4 @@
+-﻿using System;
+-using KMA.APZRPMJ2018.TextEditor.Tools;
++﻿using KMA.APZRPMJ2018.TextEditor.Tools;
+ using Exception = System.Exception;
+ 
+ namespace KMA.APZRPMJ2018.TextEditor.Managers
+diff --git a/TextEditor/Managers/StationManager.cs b/TextEditor/Managers/StationManager.cs
+index d46dda0..88997d8 100644
+--- a/TextEditor/Managers/StationManager.cs
++++ b/TextEditor/Managers/StationManager.cs
+@@ -1,6 +1,5 @@
+ ﻿using System;
+ using System.IO;
+-using System.Threading;
+ using System.Threading.Tasks;
+ using System.Windows;
+ using KMA.APZRPMJ2018.TextEditor.Models;
+@@ -18,21 +17,20 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
+             DeserializeLastUser();
+         }
+ 
+-        private async static void DeserializeLastUser()
++        private static async void DeserializeLastUser()
+         {
+             LoaderManager.Instance.ShowLoader();
+             var result = await Task.Run(() =>
+             {
+                // Thread.Sleep(3000);
+ 
+-                User userCandidate;
+-                userCandidate = SerializationManager.Deserialize<User>(Path.Combine(FileFolderHelper.LastUserFilePath));
++                var userCandidate = SerializationManager.Deserialize<User>(Path.Combine(FileFolderHelper.LastUserFilePath));
+                 if (userCandidate == null)
+                 {
+                      Logger.Log("User was not deserialized");
+                      return false;
+                 }
+-                userCandidate = DBManager.CheckCachedUser(userCandidate);
++                userCandidate = DbManager.CheckCachedUser(userCandidate);
+                 if (userCandidate == null)
+                 {
+                     MessageBox.Show("Failed to relogin last user");
+@@ -53,8 +51,6 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
+ 
+         internal static void CloseApp()
+         {
+-            SerializationManager.Serialize(CurrentUser, FileFolderHelper.LastUserFilePath);
+-            MessageBox.Show("ShutDown");
+             Logger.Log("ShutDown");
+             Environment.Exit(1);
+         }
+diff --git a/TextEditor/Models/DocumentModel.cs b/TextEditor/Models/DocumentModel.cs
+index 0754cbe..b9daeef 100644
+--- a/TextEditor/Models/DocumentModel.cs
++++ b/TextEditor/Models/DocumentModel.cs
+@@ -1,11 +1,8 @@
+-﻿using System;
+-using System.Collections.Generic;
+-using System.Linq;
+-using System.Text;
+-using System.Threading.Tasks;
++﻿using KMA.APZRPMJ2018.TextEditor.Tools;
+ 
+ namespace KMA.APZRPMJ2018.TextEditor.Models
+ {
++    /// <inheritdoc />
+     /// <summary>
+     /// Model for the text editor document.
+     /// </summary>
+@@ -14,34 +11,25 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
+         private string _text;
+         public string Text
+         {
+-            get { return _text; }
+-            set { OnPropertyChanged(ref _text, value); }
++            get => _text;
++            set => OnPropertyChanged(ref _text, value);
+         }
+ 
+         private string _filePath;
+         public string FilePath
+         {
+-            get { return _filePath; }
+-            set { OnPropertyChanged(ref _filePath, value); }
++            get => _filePath;
++            set => OnPropertyChanged(ref _filePath, value);
+         }
+ 
+         private string _fileName;
+         public string FileName
+         {
+-            get { return _fileName; }
+-            set { OnPropertyChanged(ref _fileName, value); }
++            get => _fileName;
++            set => OnPropertyChanged(ref _fileName, value);
+         }
+ 
+-        public bool isEmpty
+-        {
+-            get
+-            {
+-                if (string.IsNullOrEmpty(FileName) ||
+-                    string.IsNullOrEmpty(FilePath))
+-                    return true;
+-
+-                return false;
+-            }
+-        }
++        public bool IsEmpty => string.IsNullOrEmpty(FileName) ||
++                               string.IsNullOrEmpty(FilePath);
+     }
+ }
+diff --git a/TextEditor/Models/FormatModel.cs b/TextEditor/Models/FormatModel.cs
+index 30a137d..ab21c89 100644
+--- a/TextEditor/Models/FormatModel.cs
++++ b/TextEditor/Models/FormatModel.cs
+@@ -1,8 +1,10 @@
+ ﻿using System.Windows;
+ using System.Windows.Media;
++using KMA.APZRPMJ2018.TextEditor.Tools;
+ 
+ namespace KMA.APZRPMJ2018.TextEditor.Models
+ {
++    /// <inheritdoc />
+     /// <summary>
+     /// Model for document format properties.
+     /// </summary>
+@@ -11,47 +13,47 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
+         private FontStyle _style;
+         public FontStyle Style
+         {
+-            get { return _style; }
+-            set { OnPropertyChanged(ref _style, value); }
++            get => _style;
++            set => OnPropertyChanged(ref _style, value);
+         }
+ 
+         private FontWeight _weight;
+         public FontWeight Weight
+         {
+-            get { return _weight; }
+-            set { OnPropertyChanged(ref _weight, value); }
++            get => _weight;
++            set => OnPropertyChanged(ref _weight, value);
+         }
+ 
+         private FontFamily _family;
+         public FontFamily Family
+         {
+-            get { return _family; }
+-            set { OnPropertyChanged(ref _family, value); }
++            get => _family;
++            set => OnPropertyChanged(ref _family, value);
+         }
+ 
+         private TextWrapping _wrap;
+         public TextWrapping Wrap
+         {
+-            get { return _wrap; }
++            get => _wrap;
+             set
+             {
+                 OnPropertyChanged(ref _wrap, value);
+-                isWrapped = value == TextWrapping.Wrap ? true : false;
++                IsWrapped = value == TextWrapping.Wrap ? true : false;
+             }
+         }
+ 
+         private bool _isWrapped;
+-        public bool isWrapped
++        public bool IsWrapped
+         {
+-            get { return _isWrapped; }
+-            set { OnPropertyChanged(ref _isWrapped, value); }
++            get => _isWrapped;
++            set => OnPropertyChanged(ref _isWrapped, value);
+         }
+ 
+         private double _size;
+         public double Size
+         {
+-            get { return _size; }
+-            set { OnPropertyChanged(ref _size, value); }
++            get => _size;
++            set => OnPropertyChanged(ref _size, value);
+         }
+     }
+ }
+diff --git a/TextEditor/Models/Query.cs b/TextEditor/Models/Query.cs
+index ce75082..826d77d 100644
+--- a/TextEditor/Models/Query.cs
++++ b/TextEditor/Models/Query.cs
+@@ -4,7 +4,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
+ {
+     public enum QueryType
+     {
+-        OPENED, EDITED, NOT_EDITED
++        Opened, Edited, NotEdited
+     }
+     [Serializable]
+     public class Query
+diff --git a/TextEditor/Models/User.cs b/TextEditor/Models/User.cs
+index 0412cbb..03b40ef 100644
+--- a/TextEditor/Models/User.cs
++++ b/TextEditor/Models/User.cs
+@@ -9,114 +9,44 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
+     public class User
+     {
+         #region Const
+-        private const string PrivateKey = "<RSAKeyValue><Modulus>sr4l8EwMgPqPhRTK+dPTwGs9uYhDeUohSRL48ZDf85/5/Lo469WltKFaQvA2Msy92xq14YPPN6p6mQD7stVbinRd+hihnYoqfclYRMe+FG6jqu/QACl0N6JgwM7iKGiyzBjL1vkvcSoaqwbxD8QPHgrdNlkyP0z6Vz7j79PFEos=</Modulus><Exponent>AQAB</Exponent><P>6OkjEhjlvbDCuOl8e0Ep2zACTxkfSta8WFBmdvrinhQSowkT5xDXL0EFa/Z03XNUmjJ0xGe1aNCgG+6dDpTnSw==</P><Q>xHZTH4hXAv7uJsb/VHrcYOM5l4AyC+OxP7bhmAoGJGf4TpPxh+B0RhMxssrkc1d/72TIfRpuPbSLEqkqCSk5wQ==</Q><DP>SKFzK1CSTB4UCv/crr76Y3zMK4hlBryCDXQ9D7ta8frGeQr6puLMh9LZ8vnvJaOybUdwvFKu8pmkZDF7zrFGkw==</DP><DQ>J3ZNBAxyzds/IvLd3q4/DgcWTmQlqVW3CMFHVy7MRQvNSJtW7KAdOuYoGW2/rZtpy0BHNTnV4vcc6EaqduSdAQ==</DQ><InverseQ>4/jjapjJHdDqr5FG5a29ISgO6mRnjty6nrOisPNDi4336JdEKfAdtZvDUQoBAwKsV0oMvJ9RtPB2tS0hf5i8pA==</InverseQ><D>qcnyY/b5kbNxjasYvIQ5i3jTY2BLJ/YA9FcvXtiNw/DdGPMUiwGhrJnxEdD4yvyuBGm1CAmbV3d7icfjUBdYIe9VaZqPQ2FgYzI5DbB401+4z6Di7uKBVajLIOawlnufW4+K68T0EAFO2l9eo1RcU66W921G/pz6hObeUXt65QE=</D></RSAKeyValue>";
+-        private const string PubblicKey = "<RSAKeyValue><Modulus>sr4l8EwMgPqPhRTK+dPTwGs9uYhDeUohSRL48ZDf85/5/Lo469WltKFaQvA2Msy92xq14YPPN6p6mQD7stVbinRd+hihnYoqfclYRMe+FG6jqu/QACl0N6JgwM7iKGiyzBjL1vkvcSoaqwbxD8QPHgrdNlkyP0z6Vz7j79PFEos=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
++
++        private const string PrivateKey =
++            "<RSAKeyValue><Modulus>sr4l8EwMgPqPhRTK+dPTwGs9uYhDeUohSRL48ZDf85/5/Lo469WltKFaQvA2Msy92xq14YPPN6p6mQD7stVbinRd+hihnYoqfclYRMe+FG6jqu/QACl0N6JgwM7iKGiyzBjL1vkvcSoaqwbxD8QPHgrdNlkyP0z6Vz7j79PFEos=</Modulus><Exponent>AQAB</Exponent><P>6OkjEhjlvbDCuOl8e0Ep2zACTxkfSta8WFBmdvrinhQSowkT5xDXL0EFa/Z03XNUmjJ0xGe1aNCgG+6dDpTnSw==</P><Q>xHZTH4hXAv7uJsb/VHrcYOM5l4AyC+OxP7bhmAoGJGf4TpPxh+B0RhMxssrkc1d/72TIfRpuPbSLEqkqCSk5wQ==</Q><DP>SKFzK1CSTB4UCv/crr76Y3zMK4hlBryCDXQ9D7ta8frGeQr6puLMh9LZ8vnvJaOybUdwvFKu8pmkZDF7zrFGkw==</DP><DQ>J3ZNBAxyzds/IvLd3q4/DgcWTmQlqVW3CMFHVy7MRQvNSJtW7KAdOuYoGW2/rZtpy0BHNTnV4vcc6EaqduSdAQ==</DQ><InverseQ>4/jjapjJHdDqr5FG5a29ISgO6mRnjty6nrOisPNDi4336JdEKfAdtZvDUQoBAwKsV0oMvJ9RtPB2tS0hf5i8pA==</InverseQ><D>qcnyY/b5kbNxjasYvIQ5i3jTY2BLJ/YA9FcvXtiNw/DdGPMUiwGhrJnxEdD4yvyuBGm1CAmbV3d7icfjUBdYIe9VaZqPQ2FgYzI5DbB401+4z6Di7uKBVajLIOawlnufW4+K68T0EAFO2l9eo1RcU66W921G/pz6hObeUXt65QE=</D></RSAKeyValue>";
++
++        private const string PubblicKey =
++            "<RSAKeyValue><Modulus>sr4l8EwMgPqPhRTK+dPTwGs9uYhDeUohSRL48ZDf85/5/Lo469WltKFaQvA2Msy92xq14YPPN6p6mQD7stVbinRd+hihnYoqfclYRMe+FG6jqu/QACl0N6JgwM7iKGiyzBjL1vkvcSoaqwbxD8QPHgrdNlkyP0z6Vz7j79PFEos=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
++
+         #endregion
+ 
+         #region Fields
+-        private Guid _guid;
+-        private string _firstName;
+-        private string _lastName;
+-        private string _email;
+-        private string _login;
+-        private string _password;
+-        private DateTime _lastLoginDate;
++
+         private readonly List<Query> _queries;
++
+         #endregion
+ 
+         #region Properties
+-        public Guid Guid
+-        {
+-            get
+-            {
+-                return _guid;
+-            }
+-            private set
+-            {
+-                _guid = value;
+-            }
+-        }
+-        private string FirstName
+-        {
+-            get
+-            {
+-                return _firstName;
+-            }
+-            set
+-            {
+-                _firstName = value;
+-            }
+-        }
+-        private string LastName
+-        {
+-            get
+-            {
+-                return _lastName;
+-            }
+-            set
+-            {
+-                _lastName = value;
+-            }
+-        }
+-        private string Email
+-        {
+-            get
+-            {
+-                return _email;
+-            }
+-            set
+-            {
+-                _email = value;
+-            }
+-        }
+ 
+-        public string Login
+-        {
+-            get
+-            {
+-                return _login;
+-            }
+-            private set
+-            {
+-                _login = value;
+-            }
+-        }
+-        private string Password
+-        {
+-            get
+-            {
+-                return _password;
+-            }
+-            set
+-            {
+-                _password = value;
+-            }
+-        }
+-        private DateTime LastLoginDate
+-        {
+-            get
+-            {
+-                return _lastLoginDate;
+-            }
+-            set
+-            {
+-                _lastLoginDate = value;
+-            }
+-        }
++        public Guid Guid { get; private set; }
++        private string FirstName { get; set; }
++        private string LastName { get; set; }
++        private string Email { get; set; }
++
++        public string Login { get; private set; }
++        private string Password { get; set; }
++        private DateTime LastLoginDate { get; set; }
+ 
+-        
+         #endregion
+ 
+         #region Constructor
+ 
+         public User(string firstName, string lastName, string email, string login, string password)
+         {
+-            _guid = Guid.NewGuid();
+-            _firstName = firstName;
+-            _lastName = lastName;
+-            _email = email;
+-            _login = login;
+-            _lastLoginDate = DateTime.Now;
++            Guid = Guid.NewGuid();
++            FirstName = firstName;
++            LastName = lastName;
++            Email = email;
++            Login = login;
++            LastLoginDate = DateTime.Now;
+             _queries = new List<Query>();
+ 
+             SetPassword(password);
+@@ -125,7 +55,6 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
+         public void AddQuery(string filepath, QueryType type)
+         {
+             AddQuery(new Query(filepath, type));
+-
+         }
+ 
+         public void AddQuery(Query q)
+@@ -140,34 +69,31 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
+                 : _queries.Where(q => q.Filepath == filepath).ToList();
+         }
+ 
+-        
+         #endregion
+ 
+         private void SetPassword(string password)
+         {
+-            _password = Encrypting.GetMd5HashForString(password);
++            Password = Encrypting.GetMd5HashForString(password);
+         }
++
+         public bool CheckPassword(string password)
+         {
+-
+             try
+             {
+-                //string res = Encrypting.DecryptString(_password, PrivateKey);
+-                string res2 = Encrypting.GetMd5HashForString(password);
+-                return _password == res2;
++                var res2 = Encrypting.GetMd5HashForString(password);
++                return Password == res2;
+             }
+             catch (Exception)
+             {
+                 return false;
+             }
+         }
++
+         public bool CheckPassword(User userCandidate)
+         {
+             try
+             {
+-                //string res = Encrypting.DecryptString(_password, PrivateKey);
+-                //string res2 = Encrypting.DecryptString(userCandidate._password, PrivateKey);
+-                return _password == userCandidate._password;
++                return Password == userCandidate.Password;
+             }
+             catch (Exception)
+             {
+@@ -181,4 +107,4 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
+             return $"{LastName} {FirstName}";
+         }
+     }
+-}
++}
+\ No newline at end of file
+diff --git a/TextEditor/Properties/Resources.Designer.cs b/TextEditor/Properties/Resources.Designer.cs
+index 0bd3526..120d313 100644
+--- a/TextEditor/Properties/Resources.Designer.cs
++++ b/TextEditor/Properties/Resources.Designer.cs
+@@ -39,7 +39,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Properties {
+         internal static global::System.Resources.ResourceManager ResourceManager {
+             get {
+                 if (object.ReferenceEquals(resourceMan, null)) {
+-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KMA.APZRPMJ2018.WalletSimulator.Properties.Resources", typeof(Resources).Assembly);
++                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KMA.APZRPMJ2018.TextEditor.Properties.Resources", typeof(Resources).Assembly);
+                     resourceMan = temp;
+                 }
+                 return resourceMan;
+diff --git a/TextEditor/Properties/Settings.Designer.cs b/TextEditor/Properties/Settings.Designer.cs
+index a51ac7b..56938c6 100644
+--- a/TextEditor/Properties/Settings.Designer.cs
++++ b/TextEditor/Properties/Settings.Designer.cs
+@@ -12,7 +12,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Properties {
+     
+     
+     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
++    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
+     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+         
+         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+diff --git a/TextEditor/RelayCommand.cs b/TextEditor/RelayCommand.cs
+deleted file mode 100644
+index b00bb7d..0000000
+--- a/TextEditor/RelayCommand.cs
++++ /dev/null
+@@ -1,48 +0,0 @@
+-﻿using System;
+-using System.Collections.Generic;
+-using System.Linq;
+-using System.Text;
+-using System.Threading.Tasks;
+-using System.Windows.Input;
+-
+-namespace KMA.APZRPMJ2018.TextEditor
+-{
+-    /// <summary>
+-    /// Basic implementation of implementing a windows input command.
+-    /// </summary>
+-    public class RelayCommand : ICommand
+-    {
+-        readonly Action _execute;
+-        readonly Func<bool> _canExecute;
+-
+-        public RelayCommand(Action execute, Func<bool> canExecute)
+-        {
+-            if (execute == null)
+-                throw new NullReferenceException("execute");
+-
+-            _execute = execute;
+-            _canExecute = canExecute;
+-        }
+-
+-        public RelayCommand(Action execute) : this(execute, null)
+-        {
+-
+-        }
+-
+-        public event EventHandler CanExecuteChanged
+-        {
+-            add { CommandManager.RequerySuggested += value; }
+-            remove { CommandManager.RequerySuggested -= value; }
+-        }
+-
+-        public bool CanExecute(object parameter)
+-        {
+-            return _canExecute == null ? true : _canExecute();
+-        }
+-
+-        public void Execute(object parameter)
+-        {
+-            _execute.Invoke();
+-        }
+-    }
+-}
+diff --git a/TextEditor/TextEditor.csproj b/TextEditor/TextEditor.csproj
+index 476f858..7210732 100644
+--- a/TextEditor/TextEditor.csproj
++++ b/TextEditor/TextEditor.csproj
+@@ -6,8 +6,8 @@
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+     <ProjectGuid>{6DE9FC7C-BD79-448F-A7A4-C5C468BD3F3F}</ProjectGuid>
+     <OutputType>WinExe</OutputType>
+-    <RootNamespace>KMA.APZRPMJ2018.WalletSimulator</RootNamespace>
+-    <AssemblyName>WalletSimulator</AssemblyName>
++    <RootNamespace>KMA.APZRPMJ2018.TextEditor</RootNamespace>
++    <AssemblyName>TextEditor</AssemblyName>
+     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+@@ -102,8 +102,7 @@
+     <Compile Include="Models\FormatModel.cs" />
+     <Compile Include="Models\Query.cs" />
+     <Compile Include="Models\User.cs" />
+-    <Compile Include="ObservableObject.cs" />
+-    <Compile Include="RelayCommand.cs" />
++    <Compile Include="Tools\ObservableObject.cs" />
+     <Compile Include="Tools\Controls\LabelAndTextControl.xaml.cs">
+       <DependentUpon>LabelAndTextControl.xaml</DependentUpon>
+     </Compile>
+diff --git a/TextEditor/Tools/Encrypting.cs b/TextEditor/Tools/Encrypting.cs
+index 1f843d3..5654fac 100644
+--- a/TextEditor/Tools/Encrypting.cs
++++ b/TextEditor/Tools/Encrypting.cs
+@@ -15,7 +15,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+         }
+         public static string GetMd5HashForString(string text)
+         {
+-            MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
++            var md5Hasher = new MD5CryptoServiceProvider();
+ 
+             var hashValue = md5Hasher.ComputeHash(ConvertStringToByteArray(text));
+             var hashData = BitConverter.ToString(hashValue);
+@@ -25,14 +25,14 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+         }
+         public static string DecryptString(string inputString, string xmlString)
+         {
+-            RSACryptoServiceProvider rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
++            var rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
+             rsaCryptoServiceProvider.FromXmlString(xmlString);
+-            int base64BlockSize = 128 / 3 * 4 + 4;
+-            int iterations = inputString.Length / base64BlockSize;
+-            ArrayList arrayList = new ArrayList();
+-            for (int i = 0; i < iterations; i++)
++            const int base64BlockSize = 128 / 3 * 4 + 4;
++            var iterations = inputString.Length / base64BlockSize;
++            var arrayList = new ArrayList();
++            for (var i = 0; i < iterations; i++)
+             {
+-                byte[] encryptedBytes = Convert.FromBase64String(inputString.Substring(base64BlockSize * i, base64BlockSize));
++                var encryptedBytes = Convert.FromBase64String(inputString.Substring(base64BlockSize * i, base64BlockSize));
+                 Array.Reverse(encryptedBytes);
+                 arrayList.AddRange(rsaCryptoServiceProvider.Decrypt(encryptedBytes, true));
+             }
+@@ -41,19 +41,19 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+ 
+         private static string EncryptString(string inputString, string xmlString)
+         {
+-            RSACryptoServiceProvider rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
++            var rsaCryptoServiceProvider = new RSACryptoServiceProvider(1024);
+             rsaCryptoServiceProvider.FromXmlString(xmlString);
+-            int keySize = 128;
+-            byte[] bytes = Encoding.UTF32.GetBytes(inputString);
+-            int maxLength = keySize - 42;
+-            int dataLength = bytes.Length;
+-            int iterations = dataLength / maxLength;
++            var keySize = 128;
++            var bytes = Encoding.UTF32.GetBytes(inputString);
++            var maxLength = keySize - 42;
++            var dataLength = bytes.Length;
++            var iterations = dataLength / maxLength;
+             var stringBuilder = new StringBuilder();
+-            for (int i = 0; i <= iterations; i++)
++            for (var i = 0; i <= iterations; i++)
+             {
+                 var tempBytes = new byte[(dataLength - maxLength * i > maxLength) ? maxLength : dataLength - maxLength * i];
+                 Buffer.BlockCopy(bytes, maxLength * i, tempBytes, 0, tempBytes.Length);
+-                byte[] encryptedBytes = rsaCryptoServiceProvider.Encrypt(tempBytes, true);
++                var encryptedBytes = rsaCryptoServiceProvider.Encrypt(tempBytes, true);
+                 Array.Reverse(encryptedBytes);
+                 stringBuilder.Append(Convert.ToBase64String(encryptedBytes));
+             }
+diff --git a/TextEditor/Tools/FileUtils.cs b/TextEditor/Tools/FileUtils.cs
+index dbd60fa..780128b 100644
+--- a/TextEditor/Tools/FileUtils.cs
++++ b/TextEditor/Tools/FileUtils.cs
+@@ -6,7 +6,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+ {
+     public class FileUtils
+     {
+-        public static string CalculateMD5(string filename)
++        public static string CalculateMd5(string filename)
+         {
+             using (var md5 = MD5.Create())
+             {
+diff --git a/TextEditor/Tools/Logger.cs b/TextEditor/Tools/Logger.cs
+index 05aae5e..657ed13 100644
+--- a/TextEditor/Tools/Logger.cs
++++ b/TextEditor/Tools/Logger.cs
+@@ -21,13 +21,12 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+                 }
+                 catch
+                 {
++                    // ignored
+                 }
+                 finally
+                 {
+                     writer?.Close();
+                     file?.Close();
+-                    writer = null;
+-                    file = null;
+                 }
+             }
+         }
+diff --git a/TextEditor/Tools/NavigationModel.cs b/TextEditor/Tools/NavigationModel.cs
+index a72650d..d1e6559 100644
+--- a/TextEditor/Tools/NavigationModel.cs
++++ b/TextEditor/Tools/NavigationModel.cs
+@@ -1,8 +1,5 @@
+ ﻿using System;
+-using System.Windows;
+ using KMA.APZRPMJ2018.TextEditor.Views.Authentication;
+-using KMA.APZRPMJ2018.TextEditor.Views;
+-using SignUpView = KMA.APZRPMJ2018.TextEditor.Views.Authentication.SignUpView;
+ 
+ namespace KMA.APZRPMJ2018.TextEditor.Tools
+ {
+@@ -17,7 +14,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+     {
+         private readonly IContentWindow _contentWindow;
+         private SignInView _signInView;
+-        private Views.Authentication.SignUpView _signUpView;
++        private SignUpView _signUpView;
+         private MainView _mainView;
+ 
+         internal NavigationModel(IContentWindow contentWindow)
+@@ -35,7 +32,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+ 
+                     break;
+                 case ModesEnum.SingUp:
+-                    _contentWindow.ContentControl.Content = _signUpView ?? (_signUpView = new Views.Authentication.SignUpView());
++                    _contentWindow.ContentControl.Content = _signUpView ?? (_signUpView = new SignUpView());
+                     Logger.Log("Navigate to SignUp");
+ 
+                     break;
+diff --git a/TextEditor/ObservableObject.cs b/TextEditor/Tools/ObservableObject.cs
+similarity index 77%
+rename from TextEditor/ObservableObject.cs
+rename to TextEditor/Tools/ObservableObject.cs
+index 4b1169b..b934040 100644
+--- a/TextEditor/ObservableObject.cs
++++ b/TextEditor/Tools/ObservableObject.cs
+@@ -1,12 +1,7 @@
+-﻿using System;
+-using System.Collections.Generic;
+-using System.ComponentModel;
+-using System.Linq;
++﻿using System.ComponentModel;
+ using System.Runtime.CompilerServices;
+-using System.Text;
+-using System.Threading.Tasks;
+ 
+-namespace KMA.APZRPMJ2018.TextEditor
++namespace KMA.APZRPMJ2018.TextEditor.Tools
+ {
+     /// <summary>
+     /// Base class for objects that require property notification.
+diff --git a/TextEditor/Tools/PasswordBoxAssistant.cs b/TextEditor/Tools/PasswordBoxAssistant.cs
+index c76b87e..3415f12 100644
+--- a/TextEditor/Tools/PasswordBoxAssistant.cs
++++ b/TextEditor/Tools/PasswordBoxAssistant.cs
+@@ -50,8 +50,8 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+                 return;
+             }
+ 
+-            bool wasBound = (bool)e.OldValue;
+-            bool needToBind = (bool)e.NewValue;
++            var wasBound = (bool)e.OldValue;
++            var needToBind = (bool)e.NewValue;
+ 
+             if (wasBound)
+             {
+diff --git a/TextEditor/Tools/RelayCommand.cs b/TextEditor/Tools/RelayCommand.cs
+index 343ebfd..254baca 100644
+--- a/TextEditor/Tools/RelayCommand.cs
++++ b/TextEditor/Tools/RelayCommand.cs
+@@ -6,16 +6,17 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+     public class RelayCommand<T> : ICommand
+     {
+         #region Fields
+-        readonly Action<T> _execute;
+-        readonly Predicate<T> _canExecute;
++        private readonly Action<T> _execute;
++        private readonly Predicate<T> _canExecute;
+         #endregion
+ 
+         #region Constructors
++        /// <inheritdoc />
+         /// <summary>
+-        /// Initializes a new instance/>.
++        /// Initializes a new instance/&gt;.
+         /// </summary>
+         /// <param name="execute">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+-        /// <remarks><seealso cref="CanExecute"/> will always return true.</remarks>
++        /// <remarks><seealso cref="M:KMA.APZRPMJ2018.TextEditor.Tools.RelayCommand`1.CanExecute(System.Object)" /> will always return true.</remarks>
+         public RelayCommand(Action<T> execute)
+             : this(execute, null)
+         {
+@@ -36,13 +37,14 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+ 
+         #region ICommand Members
+ 
+-        ///<summary>
+-        ///Defines the method that determines whether the command can execute in its current state.
+-        ///</summary>
+-        ///<param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+-        ///<returns>
+-        ///true if this command can be executed; otherwise, false.
+-        ///</returns>
++        /// <inheritdoc />
++        /// <summary>
++        /// Defines the method that determines whether the command can execute in its current state.
++        /// </summary>
++        /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
++        /// <returns>
++        /// true if this command can be executed; otherwise, false.
++        /// </returns>
+         public bool CanExecute(object parameter)
+         {
+             return _canExecute?.Invoke((T)parameter) ?? true;
+@@ -53,14 +55,15 @@ namespace KMA.APZRPMJ2018.TextEditor.Tools
+         ///</summary>
+         public event EventHandler CanExecuteChanged
+         {
+-            add { CommandManager.RequerySuggested += value; }
+-            remove { CommandManager.RequerySuggested -= value; }
++            add => CommandManager.RequerySuggested += value;
++            remove => CommandManager.RequerySuggested -= value;
+         }
+ 
+-        ///<summary>
+-        ///Defines the method to be called when the command is invoked.
+-        ///</summary>
+-        ///<param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
++        /// <inheritdoc />
++        /// <summary>
++        /// Defines the method to be called when the command is invoked.
++        /// </summary>
++        /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
+         public void Execute(object parameter)
+         {
+             _execute((T)parameter);
+diff --git a/TextEditor/ViewModels/Authentication/SignInViewModel.cs b/TextEditor/ViewModels/Authentication/SignInViewModel.cs
+index 8fa0a5f..5bcaacb 100644
+--- a/TextEditor/ViewModels/Authentication/SignInViewModel.cs
++++ b/TextEditor/ViewModels/Authentication/SignInViewModel.cs
+@@ -27,7 +27,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
+         #region Properties
+         public string Password
+         {
+-            get { return _password; }
++            get => _password;
+             set
+             {
+                 _password = value;
+@@ -36,7 +36,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
+         }
+         public string Login
+         {
+-            get { return _login; }
++            get => _login;
+             set
+             {
+                 _login = value;
+@@ -45,29 +45,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
+         }
+         #region Commands
+ 
+-        public ICommand CloseCommand
+-        {
+-            get
+-            {
+-                return _closeCommand ?? (_closeCommand = new RelayCommand<object>(CloseExecute));
+-            }
+-        }
++        public ICommand CloseCommand => _closeCommand ?? (_closeCommand = new RelayCommand<object>(CloseExecute));
+ 
+-        public ICommand SignInCommand
+-        {
+-            get
+-            {
+-                return _signInCommand ?? (_signInCommand = new RelayCommand<object>(SignInExecute, SignInCanExecute));
+-            }
+-        }
++        public ICommand SignInCommand => _signInCommand ?? (_signInCommand = new RelayCommand<object>(SignInExecute, SignInCanExecute));
+ 
+-        public ICommand SignUpCommand
+-        {
+-            get
+-            {
+-                return _signUpCommand ?? (_signUpCommand = new RelayCommand<object>(SignUpExecute));
+-            }
+-        }
++        public ICommand SignUpCommand => _signUpCommand ?? (_signUpCommand = new RelayCommand<object>(SignUpExecute));
+ 
+         #endregion
+         #endregion
+@@ -92,7 +74,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
+                 try
+                 {
+                     //Thread.Sleep(3000);
+-                    currentUser = DBManager.GetUserByLogin(_login);
++                    currentUser = DbManager.GetUserByLogin(_login);
+                 }
+                 catch (Exception ex)
+                 {
+@@ -134,7 +116,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
+             });
+             LoaderManager.Instance.HideLoader();
+             if (result)
++            {
++                Login = string.Empty;
++                Password = string.Empty;
+                 NavigationManager.Instance.Navigate(ModesEnum.Main);
++            }
+         }
+ 
+         private bool SignInCanExecute(object obj)
+diff --git a/TextEditor/ViewModels/Authentication/SignUpViewModel.cs b/TextEditor/ViewModels/Authentication/SignUpViewModel.cs
+index 17d6ed4..f011953 100644
+--- a/TextEditor/ViewModels/Authentication/SignUpViewModel.cs
++++ b/TextEditor/ViewModels/Authentication/SignUpViewModel.cs
+@@ -125,7 +125,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
+                         Logger.Log("SignUp_EmailIsNotValid");
+                         return false;
+                     }
+-                    if (DBManager.UserExists(_login))
++                    if (DbManager.UserExists(_login))
+                     {
+                         MessageBox.Show(String.Format(Resources.SignUp_UserAlreadyExists, _login));
+                         Logger.Log("SignUp_UserAlreadyExists");
+@@ -142,7 +142,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
+                 try
+                 {
+                     var user = new User(_firstName, _lastName, _email, _login, _password);
+-                    DBManager.AddUser(user);
++                    DbManager.AddUser(user);
+                     StationManager.CurrentUser = user;
+                 }
+                 catch (Exception ex)
+diff --git a/TextEditor/ViewModels/EditorViewModel.cs b/TextEditor/ViewModels/EditorViewModel.cs
+index aff0cb4..2f4e115 100644
+--- a/TextEditor/ViewModels/EditorViewModel.cs
++++ b/TextEditor/ViewModels/EditorViewModel.cs
+@@ -18,11 +18,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+         {
+             Document = document;
+             Format = new FormatModel();
+-            FormatCommand = new RelayCommand(OpenStyleDialog);
+-            WrapCommand = new RelayCommand(ToggleWrap);
++            FormatCommand = new RelayCommand<object>(OpenStyleDialog);
++            WrapCommand = new RelayCommand<object>(ToggleWrap);
+         }
+ 
+-        private void OpenStyleDialog()
++        private void OpenStyleDialog(object obj)
+         {
+             var fontDialog = new FontDialog();
+             fontDialog.DataContext = Format;
+@@ -30,7 +30,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+             Logger.Log("OpenStyleDialog");
+         }
+ 
+-        private void ToggleWrap()
++        private void ToggleWrap(object obj)
+         {
+             if (Format.Wrap == System.Windows.TextWrapping.Wrap)
+                 Format.Wrap = System.Windows.TextWrapping.NoWrap;
+diff --git a/TextEditor/ViewModels/FileViewModel.cs b/TextEditor/ViewModels/FileViewModel.cs
+index 0aaf928..7a076d6 100644
+--- a/TextEditor/ViewModels/FileViewModel.cs
++++ b/TextEditor/ViewModels/FileViewModel.cs
+@@ -24,13 +24,13 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+         public FileViewModel(DocumentModel document)
+         {
+             Document = document;
+-            NewCommand = new RelayCommand(NewFile);
+-            SaveCommand = new RelayCommand(SaveFile, () => !Document.isEmpty);
+-            SaveAsCommand = new RelayCommand(SaveFileAs);
+-            OpenCommand = new RelayCommand(OpenFile);
++            NewCommand = new RelayCommand<object>(NewFile);
++            SaveCommand = new RelayCommand<object>(SaveFile, obj => !Document.IsEmpty);
++            SaveAsCommand = new RelayCommand<object>(SaveFileAs);
++            OpenCommand = new RelayCommand<object>(OpenFile);
+         }
+ 
+-        public void NewFile()
++        public void NewFile(object obj)
+         {
+             Document.FileName = string.Empty;
+             Document.FilePath = string.Empty;
+@@ -40,7 +40,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+ 
+         }
+ 
+-        private void SaveFile()
++        private void SaveFile(object obj)
+         {
+             File.WriteAllText(Document.FilePath, Document.Text);
+             RecordQuery();
+@@ -48,7 +48,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+ 
+         }
+ 
+-        private void SaveFileAs()
++        private void SaveFileAs(object obj)
+         {
+             var saveFileDialog = new SaveFileDialog();
+             saveFileDialog.Filter = "Text File (*.txt)|*.txt";
+@@ -62,7 +62,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+             }
+         }
+ 
+-        private void OpenFile()
++        private void OpenFile(object obj)
+         {
+             var openFileDialog = new OpenFileDialog();
+             if (openFileDialog.ShowDialog() == true)
+@@ -77,15 +77,15 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+ 
+         private void RecordQuery(bool isOpened = false)
+         {
+-            var currentHash = FileUtils.CalculateMD5(Document.FilePath);
++            var currentHash = FileUtils.CalculateMd5(Document.FilePath);
+             var edited = !isOpened && _lastOpenedDocumentHash != currentHash;
+             _lastOpenedDocumentHash = currentHash;
+             StationManager.CurrentFilepath = Document.FilePath;
+             StationManager.CurrentUser.AddQuery(
+                 Document.FilePath, 
+-                isOpened ? QueryType.OPENED : (edited ? QueryType.EDITED : QueryType.NOT_EDITED)
++                isOpened ? QueryType.Opened : (edited ? QueryType.Edited : QueryType.NotEdited)
+             );
+-            DBManager.UpdateUser(StationManager.CurrentUser);
++            DbManager.UpdateUser(StationManager.CurrentUser);
+ 
+         }
+ 
+diff --git a/TextEditor/ViewModels/HelpViewModel.cs b/TextEditor/ViewModels/HelpViewModel.cs
+index 7e4af46..08c96d3 100644
+--- a/TextEditor/ViewModels/HelpViewModel.cs
++++ b/TextEditor/ViewModels/HelpViewModel.cs
+@@ -1,4 +1,5 @@
+ ﻿using System.Windows.Input;
++using KMA.APZRPMJ2018.TextEditor.Tools;
+ 
+ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+ {
+@@ -11,10 +12,10 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+ 
+         public HelpViewModel()
+         {
+-            HelpCommand = new RelayCommand(DisplayAbout);
++            HelpCommand = new RelayCommand<object>(DisplayAbout);
+         }
+ 
+-        private void DisplayAbout()
++        private void DisplayAbout(object obj)
+         {
+             var helpDialog = new HelpDialog();
+             helpDialog.ShowDialog();
+diff --git a/TextEditor/ViewModels/MainViewModel.cs b/TextEditor/ViewModels/MainViewModel.cs
+index d75011c..f6a5d34 100644
+--- a/TextEditor/ViewModels/MainViewModel.cs
++++ b/TextEditor/ViewModels/MainViewModel.cs
+@@ -16,7 +16,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+     public class MainViewModel
+     {
+         //Document that is saved, loaded and hold editor text
+-        private DocumentModel _document;
++        private readonly DocumentModel _document;
+         //Manages user input for document and format styles
+         public EditorViewModel Editor { get; set; }
+         //Manages saving and loading text files
+@@ -32,27 +32,30 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+             Help = new HelpViewModel();
+             Editor = new EditorViewModel(_document);
+             File = new FileViewModel(_document);
+-            HistoryCommand = new RelayCommand(DisplayHistory);
+-            LogOutCommand = new RelayCommand(LogOut);
++            HistoryCommand = new RelayCommand<object>(DisplayHistory);
++            LogOutCommand = new RelayCommand<object>(LogOut);
+ 
+ 
+         }
+-        private void DisplayHistory()
++        private void DisplayHistory(object obj)
+         {
+             new HistoryWindow(
+             String.Join("\n", StationManager.CurrentUser.GetQueries(StationManager.CurrentFilepath))
+             ).Show();
+         }
+ 
+-        private async void LogOut()
++        private async void LogOut(object obj)
+         {
+             LoaderManager.Instance.ShowLoader();
+             var result = await Task.Run(() =>
+             {
+                 try
+                 {
+-                  //  Thread.Sleep(1000);
+-                    DBManager.UpdateUser(StationManager.CurrentUser);
++                    //  Thread.Sleep(1000);
++                    StationManager.CurrentUser = null;
++                    DbManager.UpdateUser(StationManager.CurrentUser);
++                    if (System.IO.File.Exists(FileFolderHelper.LastUserFilePath))
++                        System.IO.File.Delete(FileFolderHelper.LastUserFilePath);
+                     return true;
+                 }
+                 catch (Exception ex)
+@@ -66,6 +69,9 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
+             if (result)
+             {
+                 _document.FilePath = null;
++                _document.FileName = null;
++                _document.Text = string.Empty;
++                StationManager.CurrentFilepath = null;
+                 NavigationManager.Instance.Navigate(ModesEnum.SignIn);
+             }
+         }
