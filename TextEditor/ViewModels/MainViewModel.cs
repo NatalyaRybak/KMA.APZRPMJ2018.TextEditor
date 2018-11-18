@@ -66,7 +66,9 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             LoaderManager.Instance.HideLoader();
             if (result)
             {
+                _document.Text = "";
                 _document.FilePath = null;
+                StationManager.CurrentUser = null;
                 NavigationManager.Instance.Navigate(ModesEnum.SignIn);
             }
         }
