@@ -20,8 +20,8 @@ namespace KMA.APZRPMJ2018.TextEditor
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           // modelBuilder.Configurations.Add(new User.UserEntityConfiguration());
-            //modelBuilder.Configurations.Add(new Query.QueryEntityConfiguration());
+            modelBuilder.Configurations.Add(new User.UserEntityConfiguration());
+            modelBuilder.Configurations.Add(new Query.QueryEntityConfiguration());
         }
     }
 }

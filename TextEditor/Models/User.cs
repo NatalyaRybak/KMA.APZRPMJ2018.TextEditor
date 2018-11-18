@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using KMA.APZRPMJ2018.TextEditor.Tools;
 
@@ -20,21 +21,107 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
 
         #region Fields
 
-        private readonly List<Query> _queries;
-
+        private List<Query> _queries;
+        private Guid _guid;
+        private string _firstName;
+        private string _lastName;
+        private string _email;
+        private string _login;
+        private string _password;
+        private DateTime _lastLoginDate;
         #endregion
 
         #region Properties
+        public Guid Guid
+        {
+            get
+            {
+                return _guid;
+            }
+            private set
+            {
+                _guid = value;
+            }
+        }
+        private string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+            set
+            {
+                _firstName = value;
+            }
+        }
+        private string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+            set
+            {
+                _lastName = value;
+            }
+        }
+        private string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                _email = value;
+            }
+        }
 
-        public Guid Guid { get; private set; }
-        private string FirstName { get; set; }
-        private string LastName { get; set; }
-        private string Email { get; set; }
+        public string Login
+        {
+            get
+            {
+                return _login;
+            }
+            private set
+            {
+                _login = value;
+            }
+        }
+        private string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+            }
+        }
+        private DateTime LastLoginDate
+        {
+            get
+            {
+                return _lastLoginDate;
+            }
+            set
+            {
+                _lastLoginDate = value;
+            }
+        }
 
-        public string Login { get; private set; }
-        private string Password { get; set; }
-        private DateTime LastLoginDate { get; set; }
-
+        public List<Query> Queries
+        {
+            get
+            {
+                return _queries;
+            }
+            private set
+            {
+                _queries = value;
+            }
+        }
         #endregion
 
         #region Constructor
@@ -54,7 +141,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
 
         public void AddQuery(string filepath, QueryType type)
         {
-            AddQuery(new Query(filepath, type));
+            AddQuery(new Query(filepath, type,this));
         }
 
         public void AddQuery(Query q)
@@ -106,5 +193,43 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         {
             return $"{LastName} {FirstName}";
         }
+        #region EntityConfiguration
+
+        public class UserEntityConfiguration : EntityTypeConfiguration<User>
+        {
+            public UserEntityConfiguration()
+            {
+                ToTable("Users");
+                HasKey(s => s.Guid);
+
+                Property(p => p.Guid)
+                    .HasColumnName("Guid")
+                    .IsRequired();
+                Property(p => p.FirstName)
+                    .HasColumnName("FirstName")
+                    .IsRequired();
+                Property(p => p.LastName)
+                    .HasColumnName("LastName")
+                    .IsRequired();
+                Property(p => p.Email)
+                    .HasColumnName("Email")
+                    .IsOptional();
+                Property(p => p.Login)
+                    .HasColumnName("Login")
+                    .IsRequired();
+                Property(p => p.Password)
+                    .HasColumnName("Password")
+                    .IsRequired();
+                Property(p => p.LastLoginDate)
+                    .HasColumnName("LastLoginDate")
+                    .IsRequired();
+
+                HasMany(s => s.Queries)
+                    .WithRequired(w => w.User)
+                    .HasForeignKey(w => w.UserGuid)
+                    .WillCascadeOnDelete(true);
+            }
+        }
+        #endregion
     }
 }
