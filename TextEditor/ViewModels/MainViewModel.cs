@@ -51,9 +51,11 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             {
                 try
                 {
-                    //  Thread.Sleep(1000);
-                   // DbManager.UpdateUser(StationManager.CurrentUser);
+                    if (System.IO.File.Exists(FileFolderHelper.LastUserFilePath))
+                    {
+                        System.IO.File.Delete(FileFolderHelper.LastUserFilePath);
 
+                    }
                     return true;
                 }
                 catch (Exception ex)
