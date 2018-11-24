@@ -8,11 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>KMA.APZRPMJ2018.TextEditor</RootNamespace>
     <AssemblyName>TextEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -97,34 +98,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DBAdapter\Configuration.cs" />
-    <Compile Include="DBAdapter\EditorDBContext.cs" />
-    <Compile Include="DBAdapter\EntityWrapper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Managers\LoaderManager.cs" />
     <Compile Include="Managers\NavigationManager.cs" />
-    <Compile Include="Managers\DBManager.cs" />
-    <Compile Include="Managers\SerializationManager.cs" />
-    <Compile Include="DBAdapter\Migrations\201811180832034_InitialMigration.cs" />
-    <Compile Include="DBAdapter\Migrations\201811180832034_InitialMigration.Designer.cs">
-      <DependentUpon>201811180832034_InitialMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DocumentModel.cs" />
     <Compile Include="Models\FormatModel.cs" />
-    <Compile Include="Models\Query.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Tools\ObservableObject.cs" />
     <Compile Include="Tools\Controls\LabelAndTextControl.xaml.cs">
       <DependentUpon>LabelAndTextControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Encrypting.cs" />
-    <Compile Include="Tools\FileFolderHelper.cs" />
     <Compile Include="Tools\FileUtils.cs" />
     <Compile Include="Tools\IContentWindow.cs" />
     <Compile Include="Tools\ILoaderOwner.cs" />
-    <Compile Include="Tools\Logger.cs" />
     <Compile Include="Tools\NavigationModel.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="Tools\Controls\LabelAndPasswordControl.xaml.cs">
@@ -132,7 +119,6 @@
     </Compile>
     <Compile Include="Tools\PasswordBoxAssistant.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Managers\StationManager.cs" />
     <Compile Include="ViewModels\Authentication\SignInViewModel.cs" />
     <Compile Include="ViewModels\Authentication\SignUpViewModel.cs" />
     <Compile Include="ViewModels\EditorViewModel.cs" />
@@ -214,9 +200,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="DBAdapter\Migrations\201811180832034_InitialMigration.resx">
-      <DependentUpon>201811180832034_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resource.ua.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -233,6 +216,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Managers\Managers.csproj">
+      <Project>{2e2bea03-ccc9-4b51-990c-f64f1ddd91b2}</Project>
+      <Name>Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{79388241-ab3b-4ea6-8ddc-154bdb1b7b37}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

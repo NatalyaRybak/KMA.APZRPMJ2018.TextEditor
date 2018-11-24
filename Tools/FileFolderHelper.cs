@@ -3,27 +3,27 @@ using System.IO;
 
 namespace KMA.APZRPMJ2018.TextEditor.Tools
 {
-    internal static class FileFolderHelper
+    public static class FileFolderHelper
     {
-        private static readonly string AppDataPath =
+        public static readonly string AppDataPath =
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-        internal static readonly string ClientFolderPath =
+        public static readonly string ClientFolderPath =
             Path.Combine(AppDataPath, "TextEditor");
 
-        internal static readonly string LogFolderPath =
+        public static readonly string LogFolderPath =
             Path.Combine(ClientFolderPath, "Log");
 
-        internal static readonly string LogFilepath = Path.Combine(LogFolderPath,
+        public static readonly string LogFilepath = Path.Combine(LogFolderPath,
             "App_" + DateTime.Now.ToString("YYYY_MM_DD") + ".txt");
 
-        internal static readonly string StorageFilePath =
+        public static readonly string StorageFilePath =
             Path.Combine(ClientFolderPath, "Storage.walsim");
 
-        internal static readonly string LastUserFilePath =
+        public static readonly string LastUserFilePath =
             Path.Combine(ClientFolderPath, "LastUser.walsim");
 
-        internal static void CheckAndCreateFile(string filePath)
+        public static void CheckAndCreateFile(string filePath)
         {
             try
             {

@@ -1,12 +1,13 @@
 ﻿using KMA.APZRPMJ2018.TextEditor.Tools;
 using Exception = System.Exception;
 
+
 namespace KMA.APZRPMJ2018.TextEditor.Managers
 {
     /// <summary>
     /// Singleton manager used to help with navigation betwean controls
     /// </summary>
-    internal class NavigationManager
+    public class NavigationManager
     {
         #region static
         /// <summary>
@@ -46,7 +47,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
         /// This methos is used to switch to another navigation model
         /// </summary>
         /// <param name="navigationModel">New NavigationModel</param>
-        internal void Initialize(NavigationModel navigationModel)
+        public void Initialize(NavigationModel navigationModel)
         {
             _navigationModel = navigationModel;
         }
@@ -54,7 +55,7 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
         /// This method performs switch betwean different controls
         /// </summary>
         /// <param name="mode">Enum value of corresponding control</param>
-        internal void Navigate(ModesEnum mode)
+        public void Navigate(ModesEnum mode)
         {
             //If _navigationModel is null, nothing will happen
             try

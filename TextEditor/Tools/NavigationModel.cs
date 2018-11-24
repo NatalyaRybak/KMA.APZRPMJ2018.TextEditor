@@ -3,26 +3,26 @@ using KMA.APZRPMJ2018.TextEditor.Views.Authentication;
 
 namespace KMA.APZRPMJ2018.TextEditor.Tools
 {
-    internal enum ModesEnum
+    public enum ModesEnum
     {
         SignIn,
         SingUp,
         Main
     }
 
-    internal class NavigationModel
+    public class NavigationModel
     {
         private readonly IContentWindow _contentWindow;
         private SignInView _signInView;
         private SignUpView _signUpView;
         private MainView _mainView;
 
-        internal NavigationModel(IContentWindow contentWindow)
+        public NavigationModel(IContentWindow contentWindow)
         {
             _contentWindow = contentWindow;
         }
 
-        internal void Navigate(ModesEnum mode)
+        public void Navigate(ModesEnum mode)
         {
             switch (mode)
             {
