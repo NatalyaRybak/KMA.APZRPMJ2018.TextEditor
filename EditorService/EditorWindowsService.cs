@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceProcess;
-using System.Threading;
 using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.EditorService
