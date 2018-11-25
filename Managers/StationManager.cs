@@ -39,6 +39,8 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
                 Logger.Log("Failed to relogin last user");
             else
                 CurrentUser = userCandidate;
+                 MessageBox.Show("Last user logged " + CurrentUser.ToString());
+
         }
 
         public static void CloseApp()
