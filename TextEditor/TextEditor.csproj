@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -221,6 +224,10 @@
     <ProjectReference Include="..\Managers\Managers.csproj">
       <Project>{2e2bea03-ccc9-4b51-990c-f64f1ddd91b2}</Project>
       <Name>Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{fce46383-d529-4abb-bba8-5b7db287e6dc}</Project>
+      <Name>Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{79388241-ab3b-4ea6-8ddc-154bdb1b7b37}</Project>

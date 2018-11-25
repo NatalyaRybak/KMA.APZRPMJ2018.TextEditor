@@ -17,41 +17,33 @@ namespace KMA.APZRPMJ2018.TextEditor.Managers
             DeserializeLastUser();
         }
 
-        private static async void DeserializeLastUser()
+        private static void DeserializeLastUser()
         {
-            LoaderManager.Instance.ShowLoader();
-            var result = await Task.Run(() =>
+            User userCandidate;
+            try
             {
-               // Thread.Sleep(3000);
-
-                var userCandidate = SerializationManager.Deserialize<User>(Path.Combine(FileFolderHelper.LastUserFilePath));
-                if (userCandidate == null)
-                {
-                     Logger.Log("User was not deserialized");
-                     return false;
-                }
-                userCandidate = DbManager.CheckCachedUser(userCandidate);
-                if (userCandidate == null)
-                {
-                    MessageBox.Show("Failed to relogin last user");
-                    Logger.Log("Failed to relogin last user");
-                    return false;
-                 }
-                 else
-                 {
-                     CurrentUser = userCandidate;
-                     MessageBox.Show("Last user logged " + CurrentUser.ToString());
-                     return true;
-                 }
-            });
-            LoaderManager.Instance.HideLoader();
-            if (result)
-                NavigationManager.Instance.Navigate(ModesEnum.Main);
+                userCandidate = SerializationManager.Deserialize<User>(Path.Combine(FileFolderHelper.LastUserFilePath));
+            }
+            catch (Exception ex)
+            {
+                userCandidate = null;
+                Logger.Log("Failed to Deserialize last user", ex);
+            }
+            if (userCandidate == null)
+            {
+                Logger.Log("User was not deserialized");
+                return;
+            }
+            userCandidate = DbManager.CheckCachedUser(userCandidate);
+            if (userCandidate == null)
+                Logger.Log("Failed to relogin last user");
+            else
+                CurrentUser = userCandidate;
         }
 
-        internal static void CloseApp()
+        public static void CloseApp()
         {
-            Logger.Log("ShutDown");
+            MessageBox.Show("ShutDown");
             Environment.Exit(1);
         }
     }

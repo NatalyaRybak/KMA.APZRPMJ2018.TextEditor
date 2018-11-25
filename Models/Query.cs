@@ -1,20 +1,29 @@
 ﻿using System;
 using System.Data.Entity.ModelConfiguration;
+using System.Runtime.Serialization;
 
 namespace KMA.APZRPMJ2018.TextEditor.Models
 {
-  public enum QueryType
+    public enum QueryType
     {
         Opened, Edited, NotEdited
     }
+
+   [DataContract(IsReference = true)]
     public class Query
     {
         #region Fields
+        [DataMember]
         private Guid _guid;
+        [DataMember]
         private Guid _userGuid;
+        [DataMember]
         private User _user;
+        [DataMember]
         private DateTime _queryDateTime;
+       [DataMember]
         private string _filepath;
+       [DataMember]
         private QueryType _type;
         #endregion
 

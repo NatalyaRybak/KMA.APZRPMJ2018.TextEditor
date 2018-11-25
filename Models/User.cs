@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
+using System.Runtime.Serialization;
 using KMA.APZRPMJ2018.TextEditor.Tools;
 
 namespace KMA.APZRPMJ2018.TextEditor.Models
 {
     [Serializable]
+    [DataContract(IsReference = true)]
+
     public class User
     {
         #region Const
@@ -20,14 +23,21 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         #endregion
 
         #region Fields
+        [DataMember]
         private Guid _guid;
+        [DataMember]
         private string _firstName;
+        [DataMember]
         private string _lastName;
+        [DataMember]
         private string _email;
+        [DataMember]
         private string _login;
+        [DataMember]
         private string _password;
+        [DataMember]
         private DateTime _lastLoginDate;
-
+        [DataMember]
         [NonSerialized]
         private List<Query> _queries;
         #endregion

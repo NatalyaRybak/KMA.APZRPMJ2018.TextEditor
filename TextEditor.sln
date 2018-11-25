@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{79388241-AB3B-4EA6-8DDC-154BDB1B7B37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorService", "EditorService\EditorService.csproj", "{719D5746-4FD1-4E3C-9362-7A9B16EDD547}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorServiceInterface", "EditorServiceInterface\EditorServiceInterface.csproj", "{ADBF959D-8442-4505-B573-7DDF8AEC0C32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{79388241-AB3B-4EA6-8DDC-154BDB1B7B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79388241-AB3B-4EA6-8DDC-154BDB1B7B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79388241-AB3B-4EA6-8DDC-154BDB1B7B37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{719D5746-4FD1-4E3C-9362-7A9B16EDD547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{719D5746-4FD1-4E3C-9362-7A9B16EDD547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{719D5746-4FD1-4E3C-9362-7A9B16EDD547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{719D5746-4FD1-4E3C-9362-7A9B16EDD547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADBF959D-8442-4505-B573-7DDF8AEC0C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADBF959D-8442-4505-B573-7DDF8AEC0C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADBF959D-8442-4505-B573-7DDF8AEC0C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADBF959D-8442-4505-B573-7DDF8AEC0C32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
