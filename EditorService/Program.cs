@@ -76,7 +76,7 @@ namespace KMA.APZRPMJ2018.TextEditor.EditorService
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + ExePath);
                 return false;
             }
             return true;

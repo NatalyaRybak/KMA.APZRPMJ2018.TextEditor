@@ -9,27 +9,20 @@ namespace KMA.APZRPMJ2018.TextEditor.EditorService
     {
         private void InitializeComponent()
         {
-            this._serviceProcessInstaller = new System.ServiceProcess.ServiceProcessInstaller();
-            this._serviceInstaller = new System.ServiceProcess.ServiceInstaller();
-            // 
-            // _serviceProcessInstaller
-            // 
-            this._serviceProcessInstaller.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
-            this._serviceProcessInstaller.Password = null;
-            this._serviceProcessInstaller.Username = null;
-            this._serviceProcessInstaller.AfterInstall += new System.Configuration.Install.InstallEventHandler(this._serviceProcessInstaller_AfterInstall);
-            // 
-            // _serviceInstaller
-            // 
-            this._serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
-            this._serviceInstaller.AfterInstall += new System.Configuration.Install.InstallEventHandler(this._serviceInstaller_AfterInstall);
-            // 
-            // ProjectInstaller
-            // 
-            this.Installers.AddRange(new System.Configuration.Install.Installer[] {
-            this._serviceProcessInstaller,
-            this._serviceInstaller});
-
+            _serviceProcessInstaller = new ServiceProcessInstaller();
+            _serviceInstaller = new ServiceInstaller();
+            _serviceProcessInstaller.Account = ServiceAccount.LocalSystem;
+            _serviceProcessInstaller.Password = null;
+            _serviceProcessInstaller.Username = null;
+            _serviceInstaller.ServiceName = EditorWindowsService.CurrentServiceName;
+            _serviceInstaller.DisplayName = EditorWindowsService.CurrentServiceDisplayName;
+            _serviceInstaller.Description = EditorWindowsService.CurrentServiceDescription;
+            _serviceInstaller.StartType = ServiceStartMode.Automatic;
+            Installers.AddRange(new Installer[]
+            {
+                _serviceProcessInstaller,
+                _serviceInstaller
+            });
         }
 
         public ProjectInstaller()
@@ -39,15 +32,5 @@ namespace KMA.APZRPMJ2018.TextEditor.EditorService
 
         private ServiceProcessInstaller _serviceProcessInstaller;
         private ServiceInstaller _serviceInstaller;
-
-        private void _serviceInstaller_AfterInstall(object sender, InstallEventArgs e)
-        {
-
-        }
-
-        private void _serviceProcessInstaller_AfterInstall(object sender, InstallEventArgs e)
-        {
-
-        }
     }
 }
