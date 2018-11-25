@@ -159,7 +159,14 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels.Authentication
             });
             LoaderManager.Instance.HideLoader();
             if (result)
+            {
+                Login = string.Empty;
+                Password = string.Empty;
+                FirstName = string.Empty;
+                LastName = string.Empty;
+                Email = string.Empty;
                 NavigationManager.Instance.Navigate(ModesEnum.Main);
+            }
         }
 
         private bool SignUpCanExecute(object obj)
