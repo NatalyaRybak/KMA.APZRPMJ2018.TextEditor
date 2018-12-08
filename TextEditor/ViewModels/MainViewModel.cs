@@ -70,6 +70,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
             {
                 _document.Text = "";
                 _document.FilePath = null;
+                StationManager.CurrentFilepath = null;
                 StationManager.CurrentUser = null;
                 NavigationManager.Instance.Navigate(ModesEnum.SignIn);
             }
