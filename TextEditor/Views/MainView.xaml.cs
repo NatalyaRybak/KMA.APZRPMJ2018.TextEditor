@@ -1,5 +1,4 @@
 ﻿using KMA.APZRPMJ2018.TextEditor.ViewModels;
-using KMA.APZRPMJ2018.TextEditor.Models;
 
 namespace KMA.APZRPMJ2018.TextEditor
 {

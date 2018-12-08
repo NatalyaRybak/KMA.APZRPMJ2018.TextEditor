@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using KMA.APZRPMJ2018.TextEditor.Managers;
-
+﻿
 namespace KMA.APZRPMJ2018.TextEditor
 {
     /// <summary>
