@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using KMA.APZRPMJ2018.TextEditor.DBAdapter;
 using KMA.APZRPMJ2018.TextEditor.Models;
 using KMA.APZRPMJ2018.TextEditor.ServiceInterface;
 

@@ -32,16 +32,13 @@ namespace KMA.APZRPMJ2018.TextEditor.EditorService
         {
             Logger.Log("OnStart");
             RequestAdditionalTime(120 * 1000);
-#if DEBUG
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    Thread.Sleep(1000);
-            //}
-#endif
+
             try
             {
                 if (_serviceHost != null)
+                {
                     _serviceHost.Close();
+                }
             }
             catch
             {

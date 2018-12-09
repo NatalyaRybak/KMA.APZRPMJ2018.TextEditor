@@ -1,7 +1,7 @@
 ﻿using KMA.APZRPMJ2018.TextEditor.Models;
 using System.Data.Entity;
 
-namespace KMA.APZRPMJ2018.TextEditor
+namespace KMA.APZRPMJ2018.TextEditor.DBAdapter
 {
     internal class EditorDBContext : DbContext
     {

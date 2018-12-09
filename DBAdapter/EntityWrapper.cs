@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace KMA.APZRPMJ2018.TextEditor
+namespace KMA.APZRPMJ2018.TextEditor.DBAdapter
 {
     public static class EntityWrapper
     {

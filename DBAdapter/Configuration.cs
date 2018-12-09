@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity.Migrations;
 
-namespace KMA.APZRPMJ2018.TextEditor
+namespace KMA.APZRPMJ2018.TextEditor.DBAdapter
 {
     internal sealed class Configuration : DbMigrationsConfiguration<EditorDBContext>
     {

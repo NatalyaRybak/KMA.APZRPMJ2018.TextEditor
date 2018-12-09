@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ServiceModel;
 using KMA.APZRPMJ2018.TextEditor.Models;
 
@@ -51,33 +50,6 @@ namespace KMA.APZRPMJ2018.TextEditor.ServiceInterface
                 client.AddQuery(query);
             }
         }
-
-        public static void SaveQuery(Query query)
-        {
-            using (var myChannelFactory = new ChannelFactory<IEditorContract>("Server"))
-            {
-                IEditorContract client = myChannelFactory.CreateChannel();
-                client.SaveQuery(query);
-            }
-        }
-
-        public static List<User> GetAllUsers(Guid queryGuid)
-        {
-            using (var myChannelFactory = new ChannelFactory<IEditorContract>("Server"))
-            {
-                IEditorContract client = myChannelFactory.CreateChannel();
-                return client.GetAllUsers(queryGuid);
-            }
-        }
-
-        public static void DeleteQuery(Query selectedQuery)
-        {
-            using (var myChannelFactory = new ChannelFactory<IEditorContract>("Server"))
-            {
-                IEditorContract client = myChannelFactory.CreateChannel();
-                client.DeleteQuery(selectedQuery);
-            }
-        }
-
     }
+    
 }
