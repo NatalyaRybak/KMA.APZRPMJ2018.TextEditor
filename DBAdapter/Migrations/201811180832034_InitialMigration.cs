@@ -1,7 +1,7 @@
-namespace KMA.APZRPMJ2018.TextEditor
+using System.Data.Entity.Migrations;
+
+namespace KMA.APZRPMJ2018.TextEditor.DBAdapter.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class InitialMigration : DbMigration
     {
         public override void Up()

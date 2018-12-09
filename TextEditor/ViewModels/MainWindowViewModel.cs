@@ -14,7 +14,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         public Visibility LoaderVisibility
         {
-            get { return _visibility; }
+            get => _visibility;
             set
             {
                 _visibility = value;
@@ -24,7 +24,7 @@ namespace KMA.APZRPMJ2018.TextEditor.ViewModels
 
         public bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             set
             {
                 _isEnabled = value;

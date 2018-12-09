@@ -45,93 +45,45 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         #region Properties
         public Guid Guid
         {
-            get
-            {
-                return _guid;
-            }
-            private set
-            {
-                _guid = value;
-            }
+            get => _guid;
+            private set => _guid = value;
         }
         private string FirstName
         {
-            get
-            {
-                return _firstName;
-            }
-            set
-            {
-                _firstName = value;
-            }
+            get => _firstName;
+            set => _firstName = value;
         }
         private string LastName
         {
-            get
-            {
-                return _lastName;
-            }
-            set
-            {
-                _lastName = value;
-            }
+            get => _lastName;
+            set => _lastName = value;
         }
         private string Email
         {
-            get
-            {
-                return _email;
-            }
-            set
-            {
-                _email = value;
-            }
+            get => _email;
+            set => _email = value;
         }
 
         public string Login
         {
-            get
-            {
-                return _login;
-            }
-            private set
-            {
-                _login = value;
-            }
+            get => _login;
+            private set => _login = value;
         }
         private string Password
         {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-            }
+            get => _password;
+            set => _password = value;
         }
         private DateTime LastLoginDate
         {
-            get
-            {
-                return _lastLoginDate;
-            }
-            set
-            {
-                _lastLoginDate = value;
-            }
+            get => _lastLoginDate;
+            set => _lastLoginDate = value;
         }
 
         public List<Query> Queries
         {
-            get
-            {
-                return _queries;
-            }
-            private set
-            {
-                _queries = value;
-            }
+            get => _queries;
+            private set => _queries = value;
         }
         #endregion
 

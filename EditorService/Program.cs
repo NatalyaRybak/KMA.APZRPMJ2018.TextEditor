@@ -8,7 +8,6 @@ namespace KMA.APZRPMJ2018.TextEditor.EditorService
 {
     class Program
     {
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

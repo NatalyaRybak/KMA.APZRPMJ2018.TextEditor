@@ -30,36 +30,35 @@ namespace KMA.APZRPMJ2018.TextEditor.Models
         #region Properties
         public Guid Guid
         {
-            get { return _guid; }
-            private set { _guid = value; }
+            get => _guid;
+            private set => _guid = value;
         }
         public Guid UserGuid
         {
-            get { return _userGuid; }
-            private set { _userGuid = value; }
+            get => _userGuid;
+            private set => _userGuid = value;
         }
         public User User
         {
-            get { return _user; }
-            private set { _user = value; }
+            get => _user;
+            private set => _user = value;
         }
 
         public  DateTime QueryDateTime
         {
-            get { return _queryDateTime; }
-            private set { _queryDateTime = value; }
-
+            get => _queryDateTime;
+            private set => _queryDateTime = value;
         }
         public string Filepath
         {
-            get { return _filepath; }
-            private set { _filepath = value; }
+            get => _filepath;
+            private set => _filepath = value;
         }
 
         public QueryType Type
         {
-            get { return _type; }
-            private set { _type = value; }
+            get => _type;
+            private set => _type = value;
         }
         
         #endregion
